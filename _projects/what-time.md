@@ -1,10 +1,7 @@
 ---
-title:  "I scream"
-subtitle: "But do you scream?"
-author: "Wferr"
-avatar: "img/authors/wferr.png"
-image: "img/e.jpg"
-date:   2015-04-24 12:12:12
+title:  "Watches"
+subtitle: "The Bigger the better?"
+image: "img/c.jpg"
 ---
 
 ### Dolor sit amet?

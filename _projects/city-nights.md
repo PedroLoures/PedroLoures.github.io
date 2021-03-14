@@ -1,10 +1,7 @@
 ---
-title:  "Watches"
-subtitle: "The Bigger the better?"
-author: "Wferr"
-avatar: "img/authors/wferr.png"
-image: "img/c.jpg"
-date:   2015-04-22 12:12:12
+title:  "Nobody else was around."
+subtitle: "A Beautiful shot during the night."
+image: "img/b.jpg"
 ---
 
 ### Dolor sit amet?

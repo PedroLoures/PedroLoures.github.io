@@ -1,7 +1,22 @@
 # Site settings
 title: Modern Blog
-description: Modern-Blog A Elegant template for Jekyll
+email: your-email@example.com
+description: >- # this means to ignore newlines until "baseurl:"
+  Write an awesome description for your new site here. You can edit this
+  line in _config.yml. It will appear in your document head meta (for
+  Google search results) and in your feed.xml site description.
 keywords: Modern, Blogging, Fun
-author: Wferr
+author: Pedro Loures
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "" # the base hostname & protocol for your site
+twitter_username: jekyllrb
+github_username:  jekyll
+collections:
+  projects:
+    order:
+      - workshop.md
+      - city-nights.md
+      - i-scream.md
+      - night-sky.md
+      - planes.md
+      - what-time.md
