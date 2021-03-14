@@ -41,7 +41,8 @@ layout: compress
         <div class="pattern pattern--hidden"></div>
         <!-- cards -->
         <div class="wrapper">
-            {% for post in site.posts %}
+			{% assign filtered_posts = site.posts | where 'categories', 'gameprogramming' %}
+            {% for post in filtered_posts %}
             <div class="card" data-id="{{ post.id }}">
                 <div class="card__container card__container--closed">
                     <svg class="card__image" xmlns="http://www.w3.org/2000/svg"
@@ -60,11 +61,9 @@ layout: compress
                         <div class="card__caption">
                             <h2 class="card__title">{{ post.title }}</h2>
                             <p class="card__subtitle">{{ post.subtitle }}</p>
+							<span class="meta__date">{{ post.date | date: "%Y-%m-%d" }}</span>
                         </div>
                         <div class="card__copy">
-                            <div class="meta">
-                                <span class="meta__date">{{ post.date | date: "%Y-%m-%d" }}</span>
-                            </div>
                             {{ post.content }}
                         </div>
                     </div>
