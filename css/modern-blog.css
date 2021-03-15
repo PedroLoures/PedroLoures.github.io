@@ -91,6 +91,7 @@
 		0px 0px 0 #000,
 		0px 0px 0 #000,
 		0px 0px 0 #000;
+	background-color: #0000;
 }
 
 .card__container--closed .card__title {
@@ -102,6 +103,7 @@
 		0.02em -0.02em 0 #000,
 		-0.02em 0.02em 0 #000,
 		0.02em 0.02em 0 #000;
+	background-color:#0006;
 }
 
 .card__subtitle {
@@ -109,6 +111,7 @@
 	line-height: 1;
 	margin: 5px 0 0;
 	color: #777778;
+	background-color: #0000;
 }
 
 .card__container--closed .card__subtitle {
@@ -123,6 +126,7 @@
 		0.02em -0.02em 0 #000,
 		-0.02em 0.02em 0 #000,
 		0.02em 0.02em 0 #000;
+	background-color:#0006;
 }
 
 .card__container--closed .card__subtitle {
