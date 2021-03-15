@@ -28,12 +28,10 @@ layout: compress
 <body class="body">
 <div class="container">
     <header class="header">
-        <h1>Modern Blog<span>A Clean, Fresh Minimal Look.</span></h1>
+        <h1>{{ site.title }}<span>{{ site.subtitle }}</span></h1>
         <nav class="links">
-            <a href="#"><i class="fa fa-twitter-square fa-3x"></i></a>
-            <a href="#"><i class="fa fa-instagram fa-3x"></i></a>
-            <a href="#"><i class="fa fa-facebook-square fa-3x"></i></a>
-            <a href="#"><i class="fa fa-tumblr-square fa-3x"></i></a>
+            <a href="mailto:{{ site.email }}?subject=Mail From Portfolio" target="_blank"><i class="fa fa-envelope-square fa-3x"></i></a>
+            <a href="{{ site.linkedin }}" target="_blank"><i class="fa fa-linkedin-square fa-3x"></i></a>
         </nav>
     </header>
     <div class="content">
@@ -60,7 +58,6 @@ layout: compress
                         <div class="card__caption">
                             <h2 class="card__title">{{ project.title }}</h2>
                             <p class="card__subtitle">{{ project.subtitle }}</p>
-							<p class="card__subtitle">{{ project.year }}</p>
                         </div>
                         <div class="card__copy">
                             {{ project.content | markdownify }}

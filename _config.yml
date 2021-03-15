@@ -1,6 +1,8 @@
 # Site settings
-title: Modern Blog
-email: your-email@example.com
+title: Portfolio
+subtitle: Where you can always see<br> what I am up to
+email: pedroh.z.loures@gmail.com
+linkedin: https://www.linkedin.com/in/pedroloures/
 description: >- # this means to ignore newlines until "baseurl:"
   Write an awesome description for your new site here. You can edit this
   line in _config.yml. It will appear in your document head meta (for
@@ -14,9 +16,15 @@ github_username:  jekyll
 collections:
   projects:
     order:
-      - workshop.md
-      - city-nights.md
-      - i-scream.md
-      - night-sky.md
-      - planes.md
-      - what-time.md
+      - appfiat-treinamento.md
+      - appvale-portotubarao.md
+      - customdef.md
+      - loneliness.md
+      - blenderplug.md
+      - appfiat-personaliza.md
+      - mitologiaprog.md
+      - chaveirinho.md
+      - proceduraldung.md
+      - animal-defense.md
+      - digitalwonder.md
+      - recifuturo.md

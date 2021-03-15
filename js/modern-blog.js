@@ -148,9 +148,16 @@ var demo = (function (window) {
         if (card.isOpen && isOpenClick) {
             return;
         }
-
+		
+		var sequence;
+		
         // Create timeline for the whole sequence.
-        var sequence = new TimelineLite({paused: true});
+		if (!card.isOpen) {
+			card._container.firstElementChild.style.backgroundColor = "transparent";
+			sequence = new TimelineLite({paused: true, onComplete:function(){card._container.firstElementChild.style.display = "none";}});
+		} else {
+			sequence = new TimelineLite({paused: true, onComplete:function(){card._container.firstElementChild.style.backgroundColor = "black";}});
+		}
 
         var tweenOtherCards = _showHideOtherCards(id);
 
@@ -164,7 +171,7 @@ var demo = (function (window) {
 
         } else {
             // Close sequence.
-
+			card._container.firstElementChild.style.display = "block";
             var closeCard = card.closeCard();
             var position = closeCard.duration() * 0.8; // 80% of close card tween.
 
