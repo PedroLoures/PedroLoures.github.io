@@ -1,5 +1,13 @@
 'use strict';
 
+var mainModal = document.getElementById('mainModal');
+var mainModalContent = document.getElementById('mainModalContent');
+mainModal.addEventListener('show.bs.modal', function (event) {
+	var clonedImage = $(event.relatedTarget)[0].firstElementChild.cloneNode(true);
+	mainModalContent.innerHTML = '';
+	mainModalContent.appendChild(clonedImage);
+})
+
 /**
  * Demo.
  */
@@ -153,10 +161,9 @@ var demo = (function (window) {
 		
         // Create timeline for the whole sequence.
 		if (!card.isOpen) {
-			card._container.firstElementChild.style.backgroundColor = "transparent";
 			sequence = new TimelineLite({paused: true, onComplete:function(){card._container.firstElementChild.style.display = "none";}});
 		} else {
-			sequence = new TimelineLite({paused: true, onComplete:function(){card._container.firstElementChild.style.backgroundColor = "black";}});
+			sequence = new TimelineLite({paused: true});
 		}
 
         var tweenOtherCards = _showHideOtherCards(id);
