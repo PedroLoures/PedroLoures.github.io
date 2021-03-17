@@ -60,8 +60,9 @@ var demo = (function (window) {
             width: window.innerWidth,
             height: window.innerHeight,
             cell_size: 90,
-            variance: 1,
-            stroke_width: 1,
+            variance: 0.96,
+            stroke_width: 0.5,
+			colorFunctionIntensity: 0.88,
             x_colors: 'random',
             y_colors: 'random'
         }).svg(); // Render as SVG.
