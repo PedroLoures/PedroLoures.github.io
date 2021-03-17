@@ -435,3 +435,7 @@ a:focus {
 .modal-backdrop.show {
     opacity: 0.8;
 }
+
+.elementHidden {
+	display: none;
+}
