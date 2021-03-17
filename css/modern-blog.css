@@ -54,8 +54,8 @@
 	width: 75%;
 	/*max-width: 800px;*/
 	height: auto;
-	margin: 400px auto 60px;
-	padding: 30px 40px 22px;
+	margin: 20em auto 2em;
+	padding: 2em 3em 2em 3em;
 	background: #fff;
 }
 
@@ -70,8 +70,7 @@
 .card__caption {
 	font-size: 2em;
 	width: 90%;
-	margin: 0 auto;
-	padding: 0.035em 0.03em 0em;
+	padding-bottom: 1em;
 }
 
 .card__container--closed .card__caption {
@@ -88,13 +87,13 @@
 	line-height: 1;
 	margin: 5px 0 0 0;
 	color: #3b393d;
-	-webkit-text-stroke: 0px black;
+	-webkit-text-stroke: 0px #0000;
 	text-shadow:
-		0px 0px 0 #000,
-		0px 0px 0 #000,  
-		0px 0px 0 #000,
-		0px 0px 0 #000,
-		0px 0px 0 #000;
+		0px 0px 0 #0000,
+		0px 0px 0 #0000,  
+		0px 0px 0 #0000,
+		0px 0px 0 #0000,
+		0px 0px 0 #0000;
 	background-color: #0000;
 }
 
@@ -116,6 +115,13 @@
 	line-height: 1;
 	margin: 5px 0 0;
 	color: #777778;
+	-webkit-text-stroke: 0px #0000;
+	text-shadow:
+		0px 0px 0 #0000,
+		0px 0px 0 #0000,  
+		0px 0px 0 #0000,
+		0px 0px 0 #0000,
+		0px 0px 0 #0000;
 	background-color: #0000;
 }
 
@@ -143,7 +149,7 @@
 	font-size: 1.25em;
 	width: 95%;
 	margin: 0 auto;
-	padding: 25px 30px 100px;
+	padding: 0.025em 0.030em 0.0.25em;
 	color: #3b393d;
 }
 
@@ -211,8 +217,8 @@
 	}
 	.card__content {
 		margin-bottom: 0;
-		padding-right: 20px;
-		padding-left: 20px;
+		padding-right: 0.02em;
+		padding-left: 0.02em;
 	}
 }
 
@@ -226,14 +232,14 @@
 @media only screen and (max-width: 400px) {
 	.card__caption {
 		font-size: 1.25em;
-		padding: 35px 0px 0px;
+		padding: 0.035em 0 0;
 	}
 	.meta {
-		padding: 0 0 25px 0;
+		padding: 0 0 0.025em 0;
 	}
 	.card__copy {
 		font-size: 90%;
-		padding: 25px 0px 100px;
+		padding: 0.025em 0 0.1em;
 	}
 }
 

@@ -63,6 +63,8 @@ var Card = (function (window) {
         this._TL.add(slideContentUp/*, '-=' + clipImageOut.duration() * 0.6*/);
 
         this.isOpen = true;
+		//Speed
+		this._TL.timeScale(1.5);
 
         return this._TL;
     };
