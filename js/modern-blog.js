@@ -62,7 +62,7 @@ var demo = (function (window) {
             cell_size: 90,
             variance: 0.96,
             stroke_width: 0.5,
-			colorFunction: trianglify.colorFunctions.sparkle(0.88)
+			colorFunction: trianglify.colorFunctions.sparkle(0.88),
             x_colors: 'random',
             y_colors: 'random'
         }).svg(); // Render as SVG.
