@@ -2,12 +2,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Hello!</title>
-        <description>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</description>
+        <description>I&apos;m Pedro Loures, a Game Programmer and Designer. Come check my portfolio on this link and see what I have to offer.</description>
         <link>/</link>
         <atom:link href="/feed.xml" rel="self"
         type="application/rss+xml"/>
-        <pubDate>Mon, 15 Mar 2021 21:24:36 -0400</pubDate>
-        <lastBuildDate>Mon, 15 Mar 2021 21:24:36 -0400</lastBuildDate>
+        <pubDate>Tue, 16 Mar 2021 20:09:46 -0400</pubDate>
+        <lastBuildDate>Tue, 16 Mar 2021 20:09:46 -0400</lastBuildDate>
         <generator>Jekyll v4.2.0</generator>
         
     </channel>
