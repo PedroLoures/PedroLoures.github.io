@@ -101,13 +101,14 @@
 .card__container--closed .card__title {
 	color: #fff;
 	-webkit-text-stroke: 0.02em black;
+	text-align: center;
 	text-shadow:
 		0.06em 0.06em 0 #000,
 		-0.02em -0.02em 0 #000,  
 		0.02em -0.02em 0 #000,
 		-0.02em 0.02em 0 #000,
 		0.02em 0.02em 0 #000;
-	background-color:#0006;
+	background-color:#000a;
 }
 
 .card__subtitle {
@@ -124,13 +125,14 @@
 	margin: 5px 0 0;
 	color: #777778;
 	-webkit-text-stroke: 0.02em black;
+	text-align: center;
 	text-shadow:
 		0.06em 0.06em 0 #000,
 		-0.02em -0.02em 0 #000,  
 		0.02em -0.02em 0 #000,
 		-0.02em 0.02em 0 #000,
 		0.02em 0.02em 0 #000;
-	background-color:#0006;
+	background-color:#000a;
 }
 
 .card__container--closed .card__subtitle {
