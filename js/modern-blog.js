@@ -20,7 +20,7 @@ var demo = (function (window) {
         pattern: '.pattern',
         card: '.card',
         cardImage: '.card__image',
-        cardClose: '.card__btn-close'
+        cardClose: '.card__container--fix-image'
     };
 
     /**
@@ -54,7 +54,26 @@ var demo = (function (window) {
      * Initialise demo.
      */
     var init = function () {
+		var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+		var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
 
+        window.addEventListener("resize", function (event) {
+            $(SELECTORS.pattern).addClass(CLASSES.patternHidden);
+            $(SELECTORS.pattern).empty();
+            var newPattern = Trianglify({
+                width: window.innerWidth,
+                height: window.innerHeight,
+                cell_size: 75,
+                variance: 0.96,
+                stroke_width: 1,
+                x_colors: 'random',
+                y_colors: 'random'
+            }).svg();
+            _mapPolygons(newPattern);
+        });
+	
         // For options see: https://github.com/qrohlf/Trianglify
         var pattern = Trianglify({
             width: window.innerWidth,
@@ -117,6 +136,11 @@ var demo = (function (window) {
     var _bindCards = function () {
 
         var elements = $(SELECTORS.card);
+        document.addEventListener('click', function (e) {
+            if (e.target.matches(SELECTORS.cardClose)) {
+                location.hash = '';
+            }
+        });
 
         $.each(elements, function (card, i) {
 
@@ -130,13 +154,9 @@ var demo = (function (window) {
             $card.attr(ATTRIBUTES.index, i + '');
 
             var cardImage = $card.find(SELECTORS.cardImage);
-            var cardClose = $card.find(SELECTORS.cardClose);
 
             $(cardImage).on('click', function () {
                 location.hash = $card.attr(ATTRIBUTES.id);
-            });
-            $(cardClose).on('click', function () {
-                location.hash = '';
             });
         });
     };

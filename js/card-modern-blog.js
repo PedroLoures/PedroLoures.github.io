@@ -93,18 +93,30 @@ var Card = (function (window) {
         var TL = new TimelineLite;
 
         var start = [
-            [0, 1200],
+            [0, 1080],
             [0, 0],
             [1920, 0],
-            [1920, 1200]
+            [1920, 1080]
         ];
 
-        var end = [
-            [916, 430],
-            [1125, 643],
-            [960, 607],
-            [793, 570]
-        ];
+        var end;
+        
+        if (window.innerWidth > window.innerHeight) {
+            end = [
+                [916, 430],
+                [1125, 643],
+                [960, 607],
+                [793, 570]
+            ];
+        }
+        else {
+            end = [
+                [0, 0],
+                [0, 0],
+                [0, 0],
+                [0, 0]
+            ];
+        }
 
         var points = [];
 

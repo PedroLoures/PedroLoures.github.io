@@ -71,20 +71,23 @@
 	font-size: 2em;
 	width: 90%;
 	padding-bottom: 1em;
+	margin: auto;
 }
 
 .card__container--closed .card__caption {
 	font-size: 1em;
 	max-width: 100%;
 	padding: 0.01em 0.01em 0.3em;
-	-webkit-transform: translateY(-100%);
-	-ms-transform: translateY(-100%);
-	transform: translateY(-100%);
+	-webkit-transform: translateY(-110%);
+	-ms-transform: translateY(-110%);
+	transform: translateY(-110%);
+	margin: auto;
+	padding-bottom: 0;
 }
 
 .card__title {
 	font-size: 1.5em;
-	line-height: 1;
+	line-height: 1.1;
 	margin: 5px 0 0 0;
 	color: #3b393d;
 	-webkit-text-stroke: 0px #0000;
@@ -108,6 +111,8 @@
 		-0.02em 0.02em 0 #000,
 		0.02em 0.02em 0 #000;
 	background-color:#000a;
+	padding-bottom: 7px;
+	margin: 0;
 }
 
 .card__subtitle {
@@ -431,13 +436,17 @@ a:focus {
 }
 
 .modal img{
-	width: 70em;
+	width: auto;
+	height: auto;
+	max-width: 100%;
 }
 
 .modal-dialog.qualquer
 {
+	margin-left: auto;
+	margin-right: auto;
 	width: 70em;
-	max-width: none;
+	max-width: 65%;
 }
 
 .modal-backdrop.show {
@@ -446,4 +455,43 @@ a:focus {
 
 .elementHidden {
 	display: none;
+}
+
+.card__copy img {
+	cursor: pointer;
+}
+
+@media only screen and (max-width: 1400px) {
+	.card__title {
+		font-size: 1.25em;
+	}
+}
+
+@media only screen and (max-width: 1200px) {
+	.card__title {
+		font-size: 1em;
+	}
+}
+
+@media only screen and (max-width: 992px) {
+	.card__content {
+		margin-top: 10em;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	.card__title {
+		font-size: 0.8em;
+	}
+}
+
+@media only screen and (max-width: 580px) {
+	.card__title {
+		font-size: 1em;
+		margin-bottom: 15px;
+	}
+
+	.card__container--closed .card__title {
+		padding-bottom: 4px;
+	}
 }
