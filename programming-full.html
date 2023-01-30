@@ -1,4 +1,215 @@
-<!DOCTYPE html> <html lang="en" class="no-js"> <head> <meta charset="UTF-8"/> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1"> <title>Hello!</title> <meta name="description" content="I'm Pedro Loures, a Game Programmer and Designer. Come check my portfolio on this link and see what I have to offer."/> <meta name="keywords" content="Portfolio, Game, Developer, Dev, Programmer"/> <meta name="author" content="Pedro H Z Loures"/> <meta name="google" content="notranslate"/> <link rel="shortcut icon" href="img/favicon.ico"> <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> <link rel="stylesheet" type="text/css" href="/css/normalize.css"/> <link rel="stylesheet" type="text/css" href="/fonts/font-awesome/css/font-awesome.css"/> <link rel="stylesheet" type="text/css" href="/css/modern-blog.css"/> <!--[if IE]> <script type="text/javascript" src="js/vendors/html5.min.js"></script> <![endif]--> <script> if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) { var root = document.getElementsByTagName('html')[0]; root.setAttribute('class', 'ff'); } </script> </head> <body class="body"> <div class="modal fade" id="mainModal" tabindex="-1" aria-labelledby="mainModalLabel" aria-hidden="true"> <div class="modal-dialog qualquer modal-dialog-centered"> <div class="modal-content" id="mainModalContent"> </div> </div> </div> <div class="containerBody"> <header class="header"> <h1>Hello!<span>I'm <b>Pedro Loures</b>, a passionate professional Game Programmer and Designer who would love to create your next game.</span></h1> <nav class="links"> <a href="mailto:pedroh.z.loures@gmail.com?subject=Mail From Portfolio" target="_blank"><i class="fa fa-envelope-square fa-3x"></i></a> <a href="https://www.linkedin.com/in/pedroloures/" target="_blank"><i class="fa fa-linkedin-square fa-3x"></i></a> </nav> <a class="btn btn-primary elementHidden" href="/design/">Switch to Design Portfolio</a> </header> <div class="content"> <!-- trianglify pattern container --> <div class="pattern pattern--hidden"></div> <!-- cards --> <div class="wrapper"> <div class="card" data-id="/projects_programming/vr-carnival"> <div class="card__container card__container--closed" data-bs-toggle="tooltip" data-bs-placement="top" title="VR game made in college, my first VR"> <svg class="card__image" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice"> <defs> <clipPath id="/projects_programming/vr-carnival-clip-path"> <polygon class="clip" points="0,1080 0,0 1920,0 1920,1080"></polygon> </clipPath> </defs> <image clip-path="url(#/projects_programming/vr-carnival-clip-path)" width="1920" height="1080" xlink:href="/img/vrcarnival/Front.png"></image> </svg> <div class="card__content"> <div class="card__copy"> <div class="card__caption"> <h2 class="card__title">VR Carnival</h2> </div> <h3 id="overview">Overview</h3> <p>This project was made in less than a month while having classes on VR. Most of the assets are from either free places online or from the Unity Asset Store. The project ended up being four minigames that the group aimed to be stuff you can play sitting down and do not need to actually move, but, every single on is very physical and different.</p> <p>The games are: Shooting Gallery (w/ Bow and arrow) Whack A Mole 360 Basketball Simon Says (Click buttons as they get lit up)</p> <details> <summary><h5>CLICK FOR MORE</h5></summary> <h3 id="how-was-each-made">How was each made</h3> <p>First, we discussed what we wanted to make, and that we wanted stuff you could do sitting down since none of us had a big space to actually put the VR headsets in our homes. From there, pitched the idea of Whack A Mole in 360 like I saw in one episode of an Anime long time ago, and it did seemed fun. Though, you would play with two people. We adapted the idea to the VR, then, the rest of the group obviously mentioned basketball being part of a common thing in carnivals, and we discussed the shooting game since the VR example from Steam VR having a shooting example. The Simon Says idea was also mine because the thought of having buttons to press all around being very physical and that it would probably be fun considering I had already made the other three games by the time we discussed this one.</p> <p>Our objective since time constraint was: Make the four minigames fast, then, overtime, we start figuring out quality of life we can add in, since all of them would be possibly last minute.</p> <p>Being the only programmer in the group, had to try and make the games feel very different from one another, or we would have to rediscuss the games. Basketball was based on the cube grabbing from the Steam VR example. Using the same way to grab stuff, the area was added, put a collider in the basket, recalibrated the physics material of the ball and it was pretty much done. Small changes and quality of life like if the ball got lost, if the ball hit the ground, how much time each minigame should last, and so on was added with time playing this game.</p> <p>Then was time to make Whack A Mole. This was a bit more challenging, first finding what would be the “mole”. We ended up loving a clown when testing few models, because, when we saw shadow hitting it, we laughed so hard on it, that it had to be it. To make things faster, when the game starts had to code materializing the hammer on the player’s hands, which I reused the same portion later on for the Shooting Gallery. Then you can rotate around and whack the moles. Nothing fancy, just hit them. With time, we also added more visual effects on these to make sure you know you are getting scores and all.</p> <p>From there, I grabbed the bow and arrow from the Steam VR, and had to change it to work as I wanted, appear in the players hand, which, unfortunately did not have time to add a left or right hand choosing. In this game a lot of balloons will randomly appear as time keeps up and you just have to pop them as fast as possible. As well, all around, most of these games have stuff happening all around you, to keep you moving in place. Same thing for quality of life, as others were added so was here.</p> <p>And lastly was made this the Simon Says. The button was made with primitives, if aint mistaken, and the frame where it is in was made with some online free canvas frames. I just used it was borders for putting the buttons in. It was simply using the same idea from Steam VR for button pushing, but using it to trigger, if correct, the system will add score from it and choose new button to light up. There is always a few buttons lit up.</p> <h3 id="about-some-of-the-stuff-i-worked-on-the-project">About some of the stuff I worked on the project</h3> <p>All the minigames inherited from a MiniGameManager Singleton to, first, ensure that only was going on at a time, but also that only one of those games existed at a giving time in the Managers as well. So each code would exist solely once.</p> <p>These Singletons were also responsible for game time, and what to do before the game duration yield, after the yield and a wrap up. These were protected virtual methods, allowing them to be changed anytime.</p> <figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="n">IEnumerator</span> <span class="nf">MiniGameController</span><span class="p">(</span><span class="kt">float</span> <span class="n">totalGameTime</span><span class="p">)</span>
+<!DOCTYPE html> <html lang="en" class="no-js"> <head> <meta charset="UTF-8"/> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1"> <title>Hello!</title> <meta name="description" content="I'm Pedro Loures, a Game Programmer and Designer. Come check my portfolio on this link and see what I have to offer."/> <meta name="keywords" content="Portfolio, Game, Developer, Dev, Programmer"/> <meta name="author" content="Pedro H Z Loures"/> <meta name="google" content="notranslate"/> <link rel="shortcut icon" href="img/favicon.ico"> <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> <link rel="stylesheet" type="text/css" href="/css/normalize.css"/> <link rel="stylesheet" type="text/css" href="/fonts/font-awesome/css/font-awesome.css"/> <link rel="stylesheet" type="text/css" href="/css/modern-blog.css"/> <!--[if IE]> <script type="text/javascript" src="js/vendors/html5.min.js"></script> <![endif]--> <script> if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) { var root = document.getElementsByTagName('html')[0]; root.setAttribute('class', 'ff'); } </script> </head> <body class="body"> <div class="modal fade" id="mainModal" tabindex="-1" aria-labelledby="mainModalLabel" aria-hidden="true"> <div class="modal-dialog qualquer modal-dialog-centered"> <div class="modal-content" id="mainModalContent"> </div> </div> </div> <div class="containerBody"> <header class="header"> <h1>Hello!<span>I'm <b>Pedro Loures</b>, a passionate professional Game Programmer and Designer who would love to create your next game.</span></h1> <nav class="links"> <a href="mailto:pedroh.z.loures@gmail.com?subject=Mail From Portfolio" target="_blank"><i class="fa fa-envelope-square fa-3x"></i></a> <a href="https://www.linkedin.com/in/pedroloures/" target="_blank"><i class="fa fa-linkedin-square fa-3x"></i></a> </nav> <a class="btn btn-primary elementHidden" href="/design/">Switch to Design Portfolio</a> </header> <div class="content"> <!-- trianglify pattern container --> <div class="pattern pattern--hidden"></div> <!-- cards --> <div class="wrapper"> <div class="card" data-id="/projects_programming/dream-arcade-simulator"> <div class="card__container card__container--closed" data-bs-toggle="tooltip" data-bs-placement="top" title="The last game made in college, just before graduation"> <svg class="card__image" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice"> <defs> <clipPath id="/projects_programming/dream-arcade-simulator-clip-path"> <polygon class="clip" points="0,1080 0,0 1920,0 1920,1080"></polygon> </clipPath> </defs> <image clip-path="url(#/projects_programming/dream-arcade-simulator-clip-path)" width="1920" height="1080" xlink:href="/img/dreamarcade/Front.png"></image> </svg> <div class="card__content"> <div class="card__copy"> <div class="card__caption"> <h2 class="card__title">Dream Arcade Simulator</h2> </div> <h3 id="overview">Overview</h3> <p>Dream Arcade Simulator is a game made by me and my friends as last project in Centennial College in 2021. We were a team of five, and would often call ourselves the dream team because most of us were used to working together. The game is as simple as that, a Arcade Simulator made in just three to four months in between classes. We wanted to add many other functionalities but we wouldn’t have much time to properly test everything, so they were scrapped. You can buy different arcades, add them to your shop area, move it around whenever, rotate, sell, buy new, change decorations just for aesthetics, and robots will come in, play, if waiting is too long they will leave, at times they will be mad and will break stuff.</p> <details> <summary><h5>CLICK FOR MORE</h5></summary> <h3 id="how-it-works">How it works</h3> <p>The game flows in like turns: First you have night time, which time doesn’t flow. You can manage your place, buy stuff, move, take your time. When you are done and proceed to daytime you can even speed up the game but here the day flows by itself.</p> <p>During nighttime, you can open the shop and choose what you want to buy divided by the tab system. From there, you can place, rotate, move and sell objects as you wish. Once you are done, you can press the play button at the top. During daytime, robots will come in according to the fame of your place. They will walk around and might decide to give it a shot. Each have a specific type of game they rather play. If no machines are available they will wait for a while. If they decide to leave, they might break your machines so you will repair them later (and pay for it).</p> <p>To win, you need a lot of money and fame. Though it can be circunvented through an The Sims inspired cheat code system!</p> <h3 id="about-some-of-the-stuff-i-worked-on-the-project">About some of the stuff I worked on the project</h3> <p>I did from the Day/Night Cycle, all the Night functionalities (Buying, Placing, Griding, the store, tabs, etc), audio controllers, and some other stuff. Also helped on the AI with bug fixing like a heating issue we ran into with not proper dispose.</p> <p>A bit of coding showcase</p> <p>Cheat Code System</p> <figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="p">{</span>
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">CodeList</span><span class="p">(</span><span class="kt">string</span> <span class="n">sentCode</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="n">sentCode</span><span class="p">);</span>
+
+        <span class="k">foreach</span><span class="p">(</span><span class="n">CheatCode</span> <span class="n">cc</span> <span class="k">in</span> <span class="n">cheats</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">cc</span><span class="p">.</span><span class="n">cheatCode</span> <span class="p">==</span> <span class="n">sentCode</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">cc</span><span class="p">.</span><span class="n">cheatResults</span><span class="p">.</span><span class="nf">Invoke</span><span class="p">();</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="nf">ClearCheatTry</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">void</span> <span class="nf">ClearCheatTry</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">isCheatSystemVisible</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+        <span class="n">currentIndex</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
+        <span class="n">cheatSystemText</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="n">String</span><span class="p">.</span><span class="n">Empty</span><span class="p">;</span>
+        <span class="n">cheatSystemInput</span><span class="p">.</span><span class="nf">SetActive</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="p">[</span><span class="n">Serializable</span><span class="p">]</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">CheatCode</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="kt">string</span> <span class="n">cheatCode</span><span class="p">;</span>
+    <span class="k">public</span> <span class="n">UnityEvent</span> <span class="n">cheatResults</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure> <p>BuildController</p> <figure class="highlight"><pre><code class="language-csharp" data-lang="csharp">    <span class="k">public</span> <span class="k">void</span> <span class="nf">SelectToBuild</span><span class="p">(</span><span class="n">ArcadeMachineSO</span> <span class="n">am</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">isBuilding</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="nf">Destroy</span><span class="p">(</span><span class="n">currentNewGO</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">am</span><span class="p">.</span><span class="n">CostToBuy</span> <span class="p">&gt;</span> <span class="n">es</span><span class="p">.</span><span class="nf">GetCurrentValue</span><span class="p">())</span>
+        <span class="p">{</span>
+            <span class="k">return</span><span class="p">;</span> <span class="c1">//Cant buy. Later move this to somewhere that makes more sense, like when populating the list. #COMEBACK</span>
+        <span class="p">}</span>
+
+        <span class="n">currentNewGO</span> <span class="p">=</span> <span class="nf">Instantiate</span><span class="p">(</span><span class="n">am</span><span class="p">.</span><span class="n">MachinePrefab</span><span class="p">,</span> <span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">),</span> <span class="n">Quaternion</span><span class="p">.</span><span class="n">identity</span><span class="p">);</span> <span class="c1">//movableObject</span>
+        <span class="n">currentNewGO</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">ArcadeMachineController</span><span class="p">&gt;().</span><span class="n">am</span> <span class="p">=</span> <span class="n">am</span><span class="p">;</span>
+        <span class="n">isBuilding</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
+        <span class="n">turnOffAndOnWhenBuilding</span><span class="p">.</span><span class="nf">Invoke</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">SellObject</span><span class="p">(</span><span class="n">ArcadeMachineController</span> <span class="n">amc</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">gm</span><span class="p">.</span><span class="nf">RemoveMachine</span><span class="p">(</span><span class="n">amc</span><span class="p">);</span>
+        <span class="nf">Destroy</span><span class="p">(</span><span class="n">amc</span><span class="p">.</span><span class="n">gameObject</span><span class="p">);</span>
+        <span class="n">es</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="n">Mathf</span><span class="p">.</span><span class="nf">CeilToInt</span><span class="p">(</span><span class="n">amc</span><span class="p">.</span><span class="n">am</span><span class="p">.</span><span class="n">CostToBuy</span> <span class="p">*</span> <span class="n">es</span><span class="p">.</span><span class="n">sellingPricePercentage</span><span class="p">));</span>
+        <span class="n">shopC</span><span class="p">.</span><span class="nf">OpenWindow</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">BuyObject</span><span class="p">(</span><span class="n">ArcadeMachineSO</span> <span class="n">am</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">es</span><span class="p">.</span><span class="nf">GetCurrentValue</span><span class="p">()</span> <span class="p">&gt;=</span> <span class="n">am</span><span class="p">.</span><span class="n">CostToBuy</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">buyingMachine</span> <span class="p">=</span> <span class="n">am</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">CancelBuy</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">buyingMachine</span> <span class="p">=</span> <span class="k">null</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">Construct</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">isBuilding</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">currentNewGO</span><span class="p">.</span><span class="n">transform</span><span class="p">.</span><span class="n">parent</span> <span class="p">=</span> <span class="n">machineListObject</span><span class="p">;</span>
+
+            <span class="n">ArcadeMachineController</span> <span class="n">amc</span> <span class="p">=</span> <span class="n">currentNewGO</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">ArcadeMachineController</span><span class="p">&gt;();</span>
+            <span class="n">gm</span><span class="p">.</span><span class="nf">AddMachine</span><span class="p">(</span><span class="n">amc</span><span class="p">);</span>
+            <span class="k">foreach</span> <span class="p">(</span><span class="n">Collider</span> <span class="n">c</span> <span class="k">in</span> <span class="n">amc</span><span class="p">.</span><span class="n">colliders</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">c</span><span class="p">.</span><span class="n">enabled</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">isMoving</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">sc</span><span class="p">.</span><span class="nf">FinishMove</span><span class="p">();</span>
+                <span class="n">isMoving</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span>
+            <span class="p">{</span>
+                <span class="n">es</span><span class="p">.</span><span class="nf">Subtract</span><span class="p">(</span><span class="n">buyingMachine</span><span class="p">.</span><span class="n">CostToBuy</span><span class="p">);</span>
+                <span class="n">shopC</span><span class="p">.</span><span class="nf">OpenWindow</span><span class="p">();</span>
+            <span class="p">}</span>
+
+            <span class="n">currentNewGO</span> <span class="p">=</span> <span class="k">null</span><span class="p">;</span>
+            <span class="n">isBuilding</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+            <span class="n">reverseTurnOffAndOn</span><span class="p">.</span><span class="nf">Invoke</span><span class="p">();</span>
+            <span class="nf">StartCoroutine</span><span class="p">(</span><span class="n">sc</span><span class="p">.</span><span class="nf">JustBuiltOrMoved</span><span class="p">());</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">Destruct</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nf">Destroy</span><span class="p">(</span><span class="n">currentNewGO</span><span class="p">);</span>
+        <span class="n">isBuilding</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">isMoving</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">sc</span><span class="p">.</span><span class="nf">CancelMove</span><span class="p">();</span>
+            <span class="n">isMoving</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span></code></pre></figure> <p>DayNight Cycle</p> <figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="p">{</span>
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">SetToNighttime</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">sky</span><span class="p">.</span><span class="nf">SetFloat</span><span class="p">(</span><span class="s">"_Exposure"</span><span class="p">,</span> <span class="n">cubemapExposureFinalValue</span><span class="p">);</span>
+        <span class="nf">SkyboxShaderModifications</span><span class="p">(</span><span class="m">1</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">SetToDaytime</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">sky</span><span class="p">.</span><span class="nf">SetFloat</span><span class="p">(</span><span class="s">"_Exposure"</span><span class="p">,</span> <span class="n">cubemapExposure</span><span class="p">);</span>
+        <span class="nf">SkyboxShaderModifications</span><span class="p">(</span><span class="m">0</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">DayAtCurrentTime</span><span class="p">(</span><span class="kt">float</span> <span class="n">timeSpentPercent</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">timeSpentPercent</span> <span class="p">&gt;</span> <span class="m">1</span><span class="p">)</span>
+            <span class="n">timeSpentPercent</span> <span class="p">=</span> <span class="m">1f</span><span class="p">;</span>
+
+        <span class="kt">float</span> <span class="n">transitionAndColor</span> <span class="p">=</span> <span class="n">timeSpentPercent</span> <span class="p">*</span> <span class="n">cubemapTransitionMaxValueBeforeNight</span><span class="p">;</span>
+        <span class="nf">SkyboxShaderModifications</span><span class="p">(</span><span class="n">transitionAndColor</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">StartDay</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nf">StartCoroutine</span><span class="p">(</span><span class="nf">BlendNightDay</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">StartNight</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nf">StartCoroutine</span><span class="p">(</span><span class="nf">BlendDayNight</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="n">IEnumerator</span> <span class="nf">BlendDayNight</span><span class="p">()</span> <span class="c1">//Transition from Day to Night</span>
+    <span class="p">{</span>
+        <span class="kt">float</span> <span class="n">timeSpentPercent</span> <span class="p">=</span> <span class="m">0f</span><span class="p">;</span>
+        <span class="kt">float</span> <span class="n">exposureStep</span> <span class="p">=</span> <span class="p">(</span><span class="n">cubemapExposureFinalValue</span> <span class="p">-</span> <span class="n">cubemapExposure</span><span class="p">)</span> <span class="p">/</span> <span class="n">timeTransitionDayToNightInSeconds</span><span class="p">;</span>
+        <span class="kt">float</span> <span class="n">transitionStep</span> <span class="p">=</span> <span class="p">(</span><span class="m">1f</span> <span class="p">-</span> <span class="n">cubemapTransitionMaxValueBeforeNight</span><span class="p">)</span> <span class="p">/</span> <span class="n">timeTransitionDayToNightInSeconds</span><span class="p">;</span>
+
+        <span class="k">while</span> <span class="p">(</span><span class="n">timeSpentPercent</span> <span class="p">&lt;</span> <span class="n">timeTransitionDayToNightInSeconds</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="kt">float</span> <span class="n">transitionAndColor</span> <span class="p">=</span> <span class="p">(</span><span class="n">transitionStep</span> <span class="p">*</span> <span class="n">timeSpentPercent</span><span class="p">)</span> <span class="p">+</span> <span class="n">cubemapTransitionMaxValueBeforeNight</span><span class="p">;</span>
+            <span class="nf">SkyboxShaderModifications</span><span class="p">(</span><span class="n">transitionAndColor</span><span class="p">);</span>
+
+            <span class="kt">float</span> <span class="n">exposureValue</span> <span class="p">=</span> <span class="p">(</span><span class="n">exposureStep</span> <span class="p">*</span> <span class="n">timeSpentPercent</span><span class="p">)</span> <span class="p">+</span> <span class="n">cubemapExposure</span><span class="p">;</span>
+
+            <span class="n">sky</span><span class="p">.</span><span class="nf">SetFloat</span><span class="p">(</span><span class="s">"_Exposure"</span><span class="p">,</span> <span class="n">exposureValue</span><span class="p">);</span>
+
+            <span class="k">yield</span> <span class="k">return</span> <span class="k">new</span> <span class="nf">WaitForSeconds</span><span class="p">(</span><span class="n">stepForTransitionsInSeconds</span><span class="p">);</span>
+            
+            <span class="n">timeSpentPercent</span> <span class="p">+=</span> <span class="n">stepForTransitionsInSeconds</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="nf">SkyboxShaderModifications</span><span class="p">(</span><span class="m">1f</span><span class="p">);</span>
+        <span class="n">sky</span><span class="p">.</span><span class="nf">SetFloat</span><span class="p">(</span><span class="s">"_Exposure"</span><span class="p">,</span> <span class="n">cubemapExposureFinalValue</span><span class="p">);</span>
+
+        <span class="c1">//Unfortunately, had to put these hardcoded. Unity Event cant be a parameter to methods in Inspector just yet.</span>
+        <span class="n">gm</span><span class="p">.</span><span class="nf">StartNighttime</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">void</span> <span class="nf">SkyboxShaderModifications</span><span class="p">(</span><span class="kt">float</span> <span class="n">transitionAndColor</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">sky</span><span class="p">.</span><span class="nf">SetFloat</span><span class="p">(</span><span class="s">"_CubemapTransition"</span><span class="p">,</span> <span class="n">transitionAndColor</span><span class="p">);</span>
+        <span class="n">sky</span><span class="p">.</span><span class="nf">SetColor</span><span class="p">(</span><span class="s">"_TintColor"</span><span class="p">,</span> <span class="n">cubemapDayNightColor</span><span class="p">.</span><span class="nf">Evaluate</span><span class="p">(</span><span class="n">transitionAndColor</span><span class="p">));</span>
+        <span class="n">directionalLight</span><span class="p">.</span><span class="n">color</span> <span class="p">=</span> <span class="n">lightDayNightColor</span><span class="p">.</span><span class="nf">Evaluate</span><span class="p">(</span><span class="n">transitionAndColor</span><span class="p">);</span>
+    <span class="p">}</span></code></pre></figure> <p>Part of the AudioManager</p> <figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="p">[</span><span class="n">Serializable</span><span class="p">]</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">AudioObject</span>
+<span class="p">{</span>
+	<span class="k">public</span> <span class="n">AudioTypeEnum</span> <span class="n">audioType</span><span class="p">;</span>
+	<span class="k">public</span> <span class="n">AudioClip</span> <span class="n">audioClip</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">[</span><span class="n">Serializable</span><span class="p">]</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">AudioTrack</span>
+<span class="p">{</span>
+	<span class="k">public</span> <span class="n">AudioSource</span> <span class="n">source</span><span class="p">;</span>
+	<span class="k">public</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">AudioObject</span><span class="p">&gt;</span> <span class="n">audio</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">private</span> <span class="k">class</span> <span class="nc">AudioJob</span>
+<span class="p">{</span>
+	<span class="k">public</span> <span class="n">AudioAction</span> <span class="n">action</span><span class="p">;</span>
+	<span class="k">public</span> <span class="n">AudioTypeEnum</span> <span class="n">type</span><span class="p">;</span>
+	<span class="k">public</span> <span class="kt">float</span> <span class="n">delay</span><span class="p">,</span> <span class="n">fadeInTime</span><span class="p">,</span> <span class="n">fadeOutTime</span><span class="p">;</span>
+	<span class="k">public</span> <span class="kt">bool</span> <span class="n">fadeIn</span><span class="p">,</span> <span class="n">fadeOut</span><span class="p">;</span>
+
+	<span class="k">public</span> <span class="nf">AudioJob</span><span class="p">(</span><span class="n">AudioAction</span> <span class="n">_action</span><span class="p">,</span> <span class="n">AudioTypeEnum</span> <span class="n">_type</span><span class="p">,</span> <span class="kt">float</span> <span class="n">_delay</span> <span class="p">=</span> <span class="m">0f</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">_fadeIn</span> <span class="p">=</span> <span class="k">false</span><span class="p">,</span> <span class="kt">float</span> <span class="n">_fadeInTime</span> <span class="p">=</span> <span class="m">0f</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">_fadeOut</span> <span class="p">=</span> <span class="k">false</span><span class="p">,</span> <span class="kt">float</span> <span class="n">_fadeOutTime</span> <span class="p">=</span> <span class="m">0f</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">action</span> <span class="p">=</span> <span class="n">_action</span><span class="p">;</span>
+		<span class="n">type</span> <span class="p">=</span> <span class="n">_type</span><span class="p">;</span>
+		<span class="n">delay</span> <span class="p">=</span> <span class="n">_delay</span><span class="p">;</span>
+		<span class="n">fadeIn</span> <span class="p">=</span> <span class="n">_fadeIn</span><span class="p">;</span>
+		<span class="n">fadeInTime</span> <span class="p">=</span> <span class="n">_fadeInTime</span><span class="p">;</span>
+		<span class="n">fadeOut</span> <span class="p">=</span> <span class="n">_fadeOut</span><span class="p">;</span>
+		<span class="n">fadeOutTime</span> <span class="p">=</span> <span class="n">_fadeOutTime</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">private</span> <span class="k">enum</span> <span class="n">AudioAction</span>
+<span class="p">{</span>
+	<span class="n">START</span><span class="p">,</span>
+	<span class="n">STOP</span><span class="p">,</span>
+	<span class="n">RESTART</span>
+<span class="p">}</span></code></pre></figure> <h3 id="challenges">Challenges</h3> <p>Our prototype took a long time because many of the functionalities would need to be done or close to done before we could see if the project was fun, which is one risk factor we didn’t know before tackling the project. One member of the group wasnt as close as the rest with us and was hard to get him to be as interested and working as much as the rest of us did and that caused a lot of talks that no one really wants to have with others.</p> </details> <h3 id="images">Images</h3> <p><a data-bs-toggle="modal" data-bs-target="#mainModal"><img src="img/dreamarcade/image1.png" alt="tutorial" /></a></p> <h3 id="video">Video</h3> <div style="padding:56.25% 0 0 0;position:relative;"> <iframe src="https://www.youtube-nocookie.com/embed/-EjJkFFmHLk" frameborder="0" style="position:absolute;top:0;left:0;width:100%;height:100%;" allowfullscreen=""></iframe></div> </div> </div> </div> </div> <div class="card" data-id="/projects_programming/vr-carnival"> <div class="card__container card__container--closed" data-bs-toggle="tooltip" data-bs-placement="top" title="VR game made in college, my first VR"> <svg class="card__image" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice"> <defs> <clipPath id="/projects_programming/vr-carnival-clip-path"> <polygon class="clip" points="0,1080 0,0 1920,0 1920,1080"></polygon> </clipPath> </defs> <image clip-path="url(#/projects_programming/vr-carnival-clip-path)" width="1920" height="1080" xlink:href="/img/vrcarnival/Front.png"></image> </svg> <div class="card__content"> <div class="card__copy"> <div class="card__caption"> <h2 class="card__title">VR Carnival</h2> </div> <h3 id="overview">Overview</h3> <p>This project was made in less than a month while having classes on VR. Most of the assets are from either free places online or from the Unity Asset Store. The project ended up being four minigames that the group aimed to be stuff you can play sitting down and do not need to actually move, but, every single on is very physical and different.</p> <p>The games are: Shooting Gallery (w/ Bow and arrow) Whack A Mole 360 Basketball Simon Says (Click buttons as they get lit up)</p> <details> <summary><h5>CLICK FOR MORE</h5></summary> <h3 id="how-was-each-made">How was each made</h3> <p>First, we discussed what we wanted to make, and that we wanted stuff you could do sitting down since none of us had a big space to actually put the VR headsets in our homes. From there, pitched the idea of Whack A Mole in 360 like I saw in one episode of an Anime long time ago, and it did seemed fun. Though, you would play with two people. We adapted the idea to the VR, then, the rest of the group obviously mentioned basketball being part of a common thing in carnivals, and we discussed the shooting game since the VR example from Steam VR having a shooting example. The Simon Says idea was also mine because the thought of having buttons to press all around being very physical and that it would probably be fun considering I had already made the other three games by the time we discussed this one.</p> <p>Our objective since time constraint was: Make the four minigames fast, then, overtime, we start figuring out quality of life we can add in, since all of them would be possibly last minute.</p> <p>Being the only programmer in the group, had to try and make the games feel very different from one another, or we would have to rediscuss the games. Basketball was based on the cube grabbing from the Steam VR example. Using the same way to grab stuff, the area was added, put a collider in the basket, recalibrated the physics material of the ball and it was pretty much done. Small changes and quality of life like if the ball got lost, if the ball hit the ground, how much time each minigame should last, and so on was added with time playing this game.</p> <p>Then was time to make Whack A Mole. This was a bit more challenging, first finding what would be the “mole”. We ended up loving a clown when testing few models, because, when we saw shadow hitting it, we laughed so hard on it, that it had to be it. To make things faster, when the game starts had to code materializing the hammer on the player’s hands, which I reused the same portion later on for the Shooting Gallery. Then you can rotate around and whack the moles. Nothing fancy, just hit them. With time, we also added more visual effects on these to make sure you know you are getting scores and all.</p> <p>From there, I grabbed the bow and arrow from the Steam VR, and had to change it to work as I wanted, appear in the players hand, which, unfortunately did not have time to add a left or right hand choosing. In this game a lot of balloons will randomly appear as time keeps up and you just have to pop them as fast as possible. As well, all around, most of these games have stuff happening all around you, to keep you moving in place. Same thing for quality of life, as others were added so was here.</p> <p>And lastly was made this the Simon Says. The button was made with primitives, if aint mistaken, and the frame where it is in was made with some online free canvas frames. I just used it was borders for putting the buttons in. It was simply using the same idea from Steam VR for button pushing, but using it to trigger, if correct, the system will add score from it and choose new button to light up. There is always a few buttons lit up.</p> <h3 id="about-some-of-the-stuff-i-worked-on-the-project">About some of the stuff I worked on the project</h3> <p>All the minigames inherited from a MiniGameManager Singleton to, first, ensure that only was going on at a time, but also that only one of those games existed at a giving time in the Managers as well. So each code would exist solely once.</p> <p>These Singletons were also responsible for game time, and what to do before the game duration yield, after the yield and a wrap up. These were protected virtual methods, allowing them to be changed anytime.</p> <figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="n">IEnumerator</span> <span class="nf">MiniGameController</span><span class="p">(</span><span class="kt">float</span> <span class="n">totalGameTime</span><span class="p">)</span>
 <span class="p">{</span>
 	<span class="k">while</span> <span class="p">(</span><span class="n">totalGameTime</span> <span class="p">&gt;</span> <span class="m">0</span><span class="p">)</span>
 	<span class="p">{</span>
