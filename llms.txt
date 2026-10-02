@@ -10,6 +10,7 @@ This is a plain-text summary of pedroloures.com for recruiters, hiring tools and
 - GitHub: https://github.com/PedroLoures
 - Portfolio PDF (game design): https://pedroloures.com/attachments/pedro-loures-game-design.pdf
 - Portfolio PDF (programming): https://pedroloures.com/attachments/pedro-loures-programming.pdf
+- Location: Toronto, Ontario, Canada
 - Open to: Game design, Unity and XR roles, and collaborations
 
 ## Summary
@@ -20,8 +21,8 @@ This is a plain-text summary of pedroloures.com for recruiters, hiring tools and
 
 ## Key facts
 
-- Unity developer since 2012; studied in Brazil (PUC) and at Centennial College.
-- Unity lead (D2Studios, volunteer) on Anchored Memories, a full-body haptic VR experience about climate migration, showcased at UT Austin's Texas Immersive Institute in July 2026.
+- Based in Toronto, Canada. Unity developer since 2012; most of his projects were made in Brazil, where he studied at PUC, before Centennial College in Toronto.
+- Unity lead (D2R Studios, volunteer) on Anchored Memories, a full-body haptic VR experience about climate migration, showcased at UT Austin's Texas Immersive Institute in July 2026.
 - SBGames 2013: his capstone game Loneliness took 3rd place in the Popular Vote and won Best Short Paper in the Art & Design track; it was later featured in a PlayTV / Indiana Produções documentary on the history of video games in Brazil.
 - Shipped commercial client work at D2R Studios for Fiat (a dealership Quality Manager training sim with 76 real-world scenarios at launch, and a 3D sticker-design kiosk) and for Vale (a three-screen presentation system first built in 2012 and still in use).
 - Built a Blender facial-expression add-on that is still part of an animation pipeline.
@@ -41,10 +42,10 @@ Listed from most to least relevant. "Design" and "Programming" list what Pedro d
 Haptic VR journey on climate migration · Unity lead · UT Austin, 2026
 
 - Page: https://pedroloures.com/projects/anchored-memories/
-- Role: Unity Lead (D2Studios, volunteer)
+- Role: Unity Lead (D2R Studios, volunteer)
 - Engine / tools: Unity
 - Platform: VR + bHaptics TactSuit X40
-- Team size: 12+ (TXI, D2Studios, UT Austin advisors)
+- Team size: 12+ (TXI, D2R Studios, UT Austin advisors)
 - For: Texas Immersive Institute, UT Austin
 - Tags: Haptic VR, Unity, 2026
 - Design:
@@ -75,7 +76,7 @@ Arcade management sim · Centennial College capstone, team of 5
   - Day/night cycle with skybox, exposure and light blending
   - The whole night phase: shop with tabs, grid placement, move, rotate and sell
   - Audio manager with fade-in/out jobs, and a data-driven cheat code system using UnityEvents
-  - Fixed an AI overheating issue caused by objects that weren't being disposed
+  - Fixed AI code that overloaded the CPU (stutter, FPS drops and overheating) because objects weren't being disposed
 
 ### VR Carnival
 
@@ -119,6 +120,7 @@ Data-driven training simulation for Fiat dealership Quality Managers
 Shadow-puzzle platformer · SBGames 2013: 3rd in Popular Vote + Best Short Paper
 
 - Page: https://pedroloures.com/projects/loneliness/
+- Role: Game Designer · Level Designer · Programmer
 - For: PUC capstone
 - Tags: Puzzle platformer, SBGames award, 2013
 - Design:
@@ -192,6 +194,7 @@ Horror game jam on the theme “Another World” · led a team of newer develope
 Educational game where players solve Greek-myth challenges by writing Lua
 
 - Page: https://pedroloures.com/projects/mitologiaprog/
+- Role: Game Designer · Level Designer · Programmer
 - Engine / tools: Unity · embedded Lua
 - Team size: 2
 - Tags: Educational, Lua, Unity
@@ -207,7 +210,7 @@ Educational game where players solve Greek-myth challenges by writing Lua
 Educational tower defense game about the food chain
 
 - Page: https://pedroloures.com/projects/animal-defense/
-- Role: Lead Programmer · Game Designer · Level Designer
+- Role: Game Designer · Level Designer · Lead Programmer
 - Engine / tools: Unity
 - Platform: PC (800×600)
 - Tags: Tower defense, Educational
@@ -239,6 +242,7 @@ Touchscreen app to design custom vehicle stickers and preview them in 3D
 Tower customization for a tower defense game · two-week course project
 
 - Page: https://pedroloures.com/projects/customdef/
+- Role: Game Designer · Programmer
 - For: Centennial College course project
 - Tags: Tower defense, 2020
 - Design:
