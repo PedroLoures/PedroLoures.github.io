@@ -24,7 +24,7 @@ This is a plain-text summary of pedroloures.com for recruiters, hiring tools and
 
 ## Key facts
 
-- Based in Toronto, Canada. Unity developer since 2012; most of his projects were made in Brazil, where he studied at PUC before attending Centennial College in Toronto.
+- Lives in Toronto, Canada, where he moved from Brazil after 2019. Unity developer since 2012; most of his earlier projects were made in Brazil, where he studied at PUC, and later work includes Centennial College in Toronto and UT Austin's Texas Immersive Institute.
 - Unity lead and project engineer (independent partner, volunteer) on Anchored Memories, a five-act haptic VR story about climate migration showcased at UT Austin's Texas Immersive Institute in July 2026: engineered the project's foundation and the base code for VR interactions and audio, set up the five acts the team built on, was part of the planning team, and onboarded students onto the interdisciplinary team.
 - SBGames 2013: his capstone game Loneliness took 3rd place in the Popular Vote and won Best Short Paper in the Art & Design track; it was later featured in a PlayTV / Indiana Produções documentary on the history of video games in Brazil.
 - When he programs, he works hands-on across Unity, not only code: level setup, plugin integration and the rest of the editor work.
