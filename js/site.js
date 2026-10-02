@@ -1,8 +1,8 @@
 /* ==========================================================================
    pedroloures.com · site behaviour
    1. Background: an animated faceted honeycomb in the current palette. Hexagon
-      cells light up around the cursor and ripple on events; the triangle facets
-      inside each cell drift; cells shatter like glass where a project opens.
+      cells (each split into six equal, shaded triangles) light up around the
+      cursor and ripple on events; whole cells break loose where a project opens.
    2. Projects: a card's image grows to fill the screen while the honeycomb
       breaks open around it and a panel rises with the write-up; closing shrinks
       it back into the card; ←/→ (or swipe) switch projects in place. Each
@@ -28,11 +28,11 @@
         }
         var ctx = canvas.getContext('2d');
         var W = 0, H = 0, dpr = 1, R = 46;
-        // Honeycomb: each cell is a hexagon cut into triangles of different sizes (a
-        // drifting inner point, plus extra cuts on some edges). Cells are the pieces
-        // (glow, ripples, the window that opens), triangles are the facets that move
-        // and catch the light, and they fly apart like glass when a cell breaks.
+        // Honeycomb: each cell is a hexagon split into six equal triangles from its
+        // centre. Cells are the pieces (glow, ripples, the window that opens, breaking
+        // loose); the triangles are facets that catch the light.
         var cells = [];
+        var HEX = [0, 1, 2, 3, 4, 5].map(function (k) { var a = Math.PI / 180 * (60 * k - 30); return [Math.cos(a), Math.sin(a)]; });
         var ramp = toRgb((window.PORTFOLIO_THEME || {}).ramp || ['#0b2b33', '#0f5f63', '#0f8f7e', '#7fd6c6', '#f2b880']);
         var fromRamp = null, rampT0 = 0;
         var mouse = { x: 0.5, y: 0.35, tx: 0.5, ty: 0.35, px: -9999, py: -9999 };
@@ -69,32 +69,14 @@
             for (var row = -2; row * vstep < H + R * 4; row++) {
                 for (var q = -2; q * hw < W + hw * 3; q++) {
                     var cx = q * hw + (row & 1 ? hw / 2 : 0), cy = row * vstep;
-                    // Outline: 6 corners, and on some edges an extra cut point.
-                    var ring = [];
+                    // Six equal triangles from the centre, each shaded by how much it faces the light.
+                    var facets = [];
                     for (var k = 0; k < 6; k++) {
-                        var a = Math.PI / 180 * (60 * k - 30);
-                        ring.push({ x: Math.cos(a) * R, y: Math.sin(a) * R, slide: 0 });
-                        if (rnd() < 0.38) {
-                            var b = Math.PI / 180 * (60 * (k + 1) - 30), t = 0.3 + rnd() * 0.4;
-                            ring.push({
-                                x: (Math.cos(a) + (Math.cos(b) - Math.cos(a)) * t) * R,
-                                y: (Math.sin(a) + (Math.sin(b) - Math.sin(a)) * t) * R,
-                                ex: (Math.cos(b) - Math.cos(a)) * R, ey: (Math.sin(b) - Math.sin(a)) * R,
-                                slide: 0.12, ph: rnd() * 6.283
-                            });
-                        }
+                        facets.push(Math.cos(Math.PI / 180 * (60 * k) - LIGHT) * 0.07 + (rnd() - 0.5) * 0.03);
                     }
-                    // One shading value per facet: how much it faces the light, plus a little noise.
-                    var facets = ring.map(function (p0, i) {
-                        var p1 = ring[(i + 1) % ring.length];
-                        var ang = Math.atan2((p0.y + p1.y) / 2, (p0.x + p1.x) / 2);
-                        return Math.cos(ang - LIGHT) * 0.07 + (rnd() - 0.5) * 0.035;
-                    });
                     cells.push({
-                        x: cx, y: cy, ring: ring, facets: facets,
+                        x: cx, y: cy, facets: facets,
                         drop: rnd(), spin: (rnd() - 0.5) * 1.1,             // how this cell breaks loose
-                        ox: (rnd() - 0.5) * R * 0.5, oy: (rnd() - 0.5) * R * 0.5,   // where the cuts meet
-                        ph: rnd() * 6.283, amp: R * 0.16,
                         noise: (rnd() - 0.5) * 0.06
                     });
                 }
@@ -122,8 +104,8 @@
             mouse.x += (mouse.tx - mouse.x) * 0.06;
             mouse.y += (mouse.ty - mouse.y) * 0.06;
             var shiftX = still ? 0 : (mouse.x - 0.5) * -18;
-            var shiftY = (still ? 0 : (mouse.y - 0.5) * -12) - Math.min(window.scrollY * 0.03, R * 1.8);
-            var time = still ? 0 : t;
+            var scrollY0 = -Math.min(window.scrollY * 0.03, R * 1.8);
+            var shiftY = (still ? 0 : (mouse.y - 0.5) * -12) + scrollY0;
 
             effects = effects.filter(function (e) { return t - e.t0 < e.life; });
             if (fromRamp && t - rampT0 > 700) { fromRamp = null; }
@@ -159,45 +141,36 @@
                 }
 
                 // Breaking: cells inside the window are gone. On its edge whole hexagons break
-                // loose one by one, the closer to the opening the more, and tumble outward.
-                var k = 1, awayX = 0, awayY = 0;
+                // loose, the closer to the opening the more, and tumble outward. This is worked
+                // out from the cell's resting place, so the cursor's parallax never flips a cell
+                // between broken and whole; cells nearest the opening shrink away smoothly.
+                var k = 1, awayX = 0, awayY = 0, size = 1;
                 if (win) {
-                    var ex = (cx - win.x) / win.rx, ey = (cy - win.y) / win.ry;
+                    var ex = (cell.x - win.x) / win.rx, ey = (cell.y + scrollY0 - win.y) / win.ry;
                     var ed = Math.sqrt(ex * ex + ey * ey);
-                    if (ed < 1) { continue; }
                     if (ed < 1.4) {
-                        k = (ed - 1) / 0.4;
-                        if (k < cell.drop * 0.8) { continue; }        // this cell has fallen out
+                        k = Math.max(0, (ed - 1) / 0.4);
+                        size = Math.min(1, Math.max(0, (k - cell.drop * 0.7) / 0.18));
+                        if (size <= 0) { continue; }                  // this cell has fallen out
                         v += 0.1 * (1 - k);
                         awayX = ex / ed; awayY = ey / ed;
                     }
                 }
                 var loose = 1 - k;
+                var rr = R * size * (1 - 0.2 * loose);
                 ctx.save();
                 ctx.translate(cx + awayX * loose * R * 0.5, cy + awayY * loose * R * 0.5);
-                if (loose > 0) {
-                    ctx.rotate(cell.spin * loose);
-                    var sc = 1 - 0.2 * loose;
-                    ctx.scale(sc, sc);
-                }
+                if (loose > 0) { ctx.rotate(cell.spin * loose); }
 
-                // The point where the cuts meet drifts inside the cell, so the facets keep moving.
-                var px = cell.ox + Math.sin(time * 0.00045 + cell.ph) * cell.amp;
-                var py = cell.oy + Math.cos(time * 0.0004 + cell.ph) * cell.amp;
-                var ring = cell.ring, n = ring.length;
                 var contrast = 1 + glow * 1.6;          // facets catch more light near the cursor
                 var tilt = cell.spin * loose * 0.2;     // a loose cell turns its face to the light
-
-                for (var i = 0; i < n; i++) {
-                    var a = ring[i], b = ring[(i + 1) % n];
-                    var ax = a.x, ay = a.y, bx = b.x, by = b.y;
-                    if (a.slide && !still) { var sa = Math.sin(time * 0.0006 + a.ph) * a.slide; ax += a.ex * sa; ay += a.ey * sa; }
-                    if (b.slide && !still) { var sb = Math.sin(time * 0.0006 + b.ph) * b.slide; bx += b.ex * sb; by += b.ey * sb; }
+                for (var i = 0; i < 6; i++) {
+                    var A = HEX[i], B = HEX[(i + 1) % 6];
                     ctx.fillStyle = rampColor(v + cell.facets[i] * contrast + tilt, t);
                     ctx.beginPath();
-                    ctx.moveTo(px, py);
-                    ctx.lineTo(ax, ay);
-                    ctx.lineTo(bx, by);
+                    ctx.moveTo(0, 0);
+                    ctx.lineTo(A[0] * rr, A[1] * rr);
+                    ctx.lineTo(B[0] * rr, B[1] * rr);
                     ctx.closePath();
                     ctx.fill();
                     ctx.strokeStyle = ctx.fillStyle; ctx.lineWidth = 1; ctx.stroke();
@@ -206,9 +179,7 @@
                 // Cell walls; a loose cell's rim catches the light like a glass edge.
                 ctx.beginPath();
                 for (var j = 0; j < 6; j++) {
-                    var ang = Math.PI / 180 * (60 * j - 30);
-                    var X = Math.cos(ang) * R, Y = Math.sin(ang) * R;
-                    if (j) { ctx.lineTo(X, Y); } else { ctx.moveTo(X, Y); }
+                    if (j) { ctx.lineTo(HEX[j][0] * rr, HEX[j][1] * rr); } else { ctx.moveTo(HEX[j][0] * rr, HEX[j][1] * rr); }
                 }
                 ctx.closePath();
                 if (loose > 0) {
