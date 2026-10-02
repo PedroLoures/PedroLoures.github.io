@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /print/
+Sitemap: https://pedroloures.com/sitemap.xml

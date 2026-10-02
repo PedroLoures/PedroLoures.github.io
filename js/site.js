@@ -2,8 +2,10 @@
    pedroloures.com · site behaviour
    1. Background: an animated low-poly field in the current palette. It drifts,
       leans away from the cursor, lights up around it and ripples on events.
-   2. Projects: cards open into a panel with a fly-out animation (the card image
-      flies into place), close back into the card, and ←/→ switch in place.
+   2. Projects: a card's image grows to fill the screen while the triangle field
+      breaks open around it and a panel rises with the write-up; closing shrinks
+      it back into the card; ←/→ (or swipe) switch projects in place. Each
+      project also has its own page (/projects/<slug>/) for sharing and search.
    3. Small things: gallery lightbox, copy-email, palette dice, toasts.
    Respects prefers-reduced-motion everywhere.
    ========================================================================== */
@@ -21,11 +23,11 @@
     var Field = (function () {
         var canvas = $('#bg');
         if (!canvas || !canvas.getContext) {
-            return { ripple: function () {}, sweep: function () {}, setBusy: function () {}, frame: function () {}, unframe: function () {}, el: null };
+            return { ripple: function () {}, sweep: function () {}, frame: function () {}, unframe: function () {}, el: null };
         }
         var ctx = canvas.getContext('2d');
         var W = 0, H = 0, dpr = 1, cell = 90, cols = 0, rows = 0;
-        var pts = [], tris = [];
+        var pts = [], tris = [], noise = [];
         var ramp = toRgb((window.PORTFOLIO_THEME || {}).ramp || ['#0b2b33', '#0f5f63', '#0f8f7e', '#7fd6c6', '#f2b880']);
         var fromRamp = null, rampT0 = 0;
         var mouse = { x: 0.5, y: 0.35, tx: 0.5, ty: 0.35, px: -9999, py: -9999 };
@@ -35,9 +37,10 @@
         // edge shrink into shards, the ones inside disappear.
         var hole = null;            // { from, to, t0, dur } ellipses: { x, y, rx, ry }
         var home = canvas.parentNode, homeNext = canvas.nextSibling;
-        var busy = false;           // a project is open: only animate while effects run
-        var running = false, last = 0;
-        var frameGap = FINE_POINTER ? 0 : 1000 / 30;  // touch devices: 30 fps is plenty
+        var running = false, last = 0, lastInput = 0;
+        // Full frame rate only while something is happening (mouse moving, an effect, a
+        // window opening); the slow idle drift runs at 30 fps to save battery.
+        var IDLE_GAP = 1000 / 30, ACTIVE_GAP = FINE_POINTER ? 0 : 1000 / 30;
 
         function toRgb(list) {
             return list.map(function (h) {
@@ -46,7 +49,7 @@
         }
         function seeded(n) {               // stable per-triangle noise
             var x = Math.sin(n * 127.1) * 43758.5453;
-            return x - Math.floor(x);
+            return (x - Math.floor(x) - 0.5) * 0.07;
         }
 
         function build() {
@@ -80,6 +83,8 @@
                     if ((r + c) % 2) { tris.push([i, j, k], [j, l, k]); } else { tris.push([i, j, l], [i, l, k]); }
                 }
             }
+            noise = tris.map(function (t, q) { return seeded(q); });
+            if (hole) { hole.to = windowShape(); hole.from = hole.to; }   // resized or rotated while open
             draw(performance.now());
         }
 
@@ -124,7 +129,7 @@
             for (var q = 0; q < tris.length; q++) {
                 var tr = tris[q], A = P[tr[0]], B = P[tr[1]], C = P[tr[2]];
                 var cx = (A[0] + B[0] + C[0]) / 3, cy = (A[1] + B[1] + C[1]) / 3;
-                var v = 0.08 + 0.74 * (cx / W * 0.55 + (1 - cy / H) * 0.45) + (seeded(q) - 0.5) * 0.07;
+                var v = 0.08 + 0.74 * (cx / W * 0.55 + (1 - cy / H) * 0.45) + noise[q];
 
                 if (FINE_POINTER && !still) {              // glow around the cursor
                     var dx = cx - mouse.px, dy = cy - mouse.py, d = Math.sqrt(dx * dx + dy * dy);
@@ -178,7 +183,7 @@
         }
         function holeAt(t) {
             if (!hole) { return null; }
-            var a = Math.min(1, (t - hole.t0) / hole.dur);
+            var a = hole.dur > 0 ? Math.max(0, Math.min(1, (t - hole.t0) / hole.dur)) : 1;
             var e = a < 0.5 ? 4 * a * a * a : 1 - Math.pow(-2 * a + 2, 3) / 2;   // ease in-out
             var f = hole.from, g = hole.to;
             return { x: f.x + (g.x - f.x) * e, y: f.y + (g.y - f.y) * e, rx: f.rx + (g.rx - f.rx) * e, ry: f.ry + (g.ry - f.ry) * e, done: a >= 1 };
@@ -187,10 +192,10 @@
         function loop(t) {
             running = false;
             if (document.hidden) { return; }
-            var opening = hole && (t - hole.t0) < hole.dur;
-            var active = !REDUCED && (!busy || effects.length || fromRamp);
-            if (t - last >= frameGap || opening) { draw(t); last = t; }
-            if (active || effects.length || fromRamp || opening) { start(); }
+            var opening = !!hole && (t - hole.t0) < hole.dur;
+            var lively = opening || effects.length > 0 || !!fromRamp || t - lastInput < 1500;
+            if (t - last >= (lively ? ACTIVE_GAP : IDLE_GAP)) { draw(t); last = t; }
+            if (!REDUCED || lively) { start(); }
         }
         function start() {
             if (!running) { running = true; requestAnimationFrame(loop); }
@@ -212,11 +217,11 @@
             mouse.ty = e.clientY / H;
             mouse.px = e.clientX;
             mouse.py = e.clientY;
-            if (busy) { return; }
+            lastInput = performance.now();
             start();
         }, { passive: true });
         document.addEventListener('mouseleave', function () { mouse.px = mouse.py = -9999; });
-        window.addEventListener('scroll', function () { if (!busy) { start(); } }, { passive: true });
+        window.addEventListener('scroll', function () { lastInput = performance.now(); start(); }, { passive: true });
         document.addEventListener('visibilitychange', function () { if (!document.hidden) { start(); } });
         document.addEventListener('palettechange', function (e) {
             fromRamp = REDUCED ? null : ramp;
@@ -240,7 +245,6 @@
                 effects.push({ type: 'sweep', dir: dir, t0: performance.now(), life: 650 });
                 start();
             },
-            setBusy: function (b) { busy = b; if (!b) { start(); } },
             el: canvas,
             // Move the field in front of the project image (inside `parent`, before `before`)
             // and open a window in it, growing from `fromRect` (the clicked card) if given.
@@ -249,7 +253,7 @@
                 var start0 = fromRect
                     ? { x: fromRect.left + fromRect.width / 2, y: fromRect.top + fromRect.height / 2, rx: fromRect.width * 0.55, ry: fromRect.height * 0.6 }
                     : { x: target.x, y: target.y, rx: target.rx * 0.2, ry: target.ry * 0.2 };
-                parent.insertBefore(canvas, before);
+                parent.insertBefore(canvas, before || null);
                 canvas.classList.add('bg--framing');
                 hole = { from: start0, to: target, t0: performance.now(), dur: REDUCED ? 0 : 680 };
                 if (!REDUCED && canvas.animate) {
@@ -268,6 +272,26 @@
             }
         };
     })();
+
+    // Paragraphs that hold only images become a gallery grid, and each image becomes a
+    // keyboard-reachable button that opens the lightbox.
+    function tagGalleries(root) {
+        $$('p', root).forEach(function (p) {
+            var nodes = Array.prototype.filter.call(p.childNodes, function (n) {
+                return !(n.nodeType === 3 && !n.textContent.trim());
+            });
+            var onlyImages = nodes.length && nodes.every(function (n) {
+                return n.nodeName === 'IMG' || (n.nodeName === 'A' && n.querySelector('img') && !n.getAttribute('href'));
+            });
+            if (!onlyImages) { return; }
+            p.classList.add('gallery');
+            $$('img', p).forEach(function (img) {
+                img.tabIndex = 0;
+                img.setAttribute('role', 'button');
+                img.setAttribute('aria-label', 'View image full size' + (img.alt ? ': ' + img.alt : ''));
+            });
+        });
+    }
 
     /* ======================================================================
        2. Project viewer
@@ -298,7 +322,8 @@
         var cardFor = function (slug) { return cards[order.indexOf(slug)] || null; };
         var templateFor = function (slug) { return document.getElementById('project-' + slug); };
         var hashSlug = function () {
-            var h = decodeURIComponent(location.hash.slice(1));
+            var h;
+            try { h = decodeURIComponent(location.hash.slice(1)); } catch (err) { return null; }
             return h && templateFor(h) ? h : null;
         };
         var inView = function (el) {
@@ -307,7 +332,13 @@
         };
         var screenRect = function () { return { left: 0, top: 0, width: window.innerWidth, height: window.innerHeight }; };
 
+        var behind = $$('body > .topbar, body > .page');
         function lockPage(on) {
+            // Keyboard and screen-reader users stay inside the open project.
+            behind.forEach(function (el) {
+                if (on) { el.setAttribute('inert', ''); el.setAttribute('aria-hidden', 'true'); }
+                else { el.removeAttribute('inert'); el.removeAttribute('aria-hidden'); }
+            });
             if (on) {
                 var gap = window.innerWidth - document.documentElement.clientWidth;
                 document.body.style.paddingRight = gap > 0 ? gap + 'px' : '';
@@ -325,17 +356,7 @@
             if (!keepBg) { bgImg.src = tpl.getAttribute('data-image'); }
             var title = $('.proj__title', content);
             if (title) { title.id = 'viewer-title'; }
-            // Paragraphs that hold only images become a gallery grid.
-            $$('p', content).forEach(function (p) {
-                var nodes = Array.prototype.filter.call(p.childNodes, function (n) {
-                    return !(n.nodeType === 3 && !n.textContent.trim());
-                });
-                if (nodes.length && nodes.every(function (n) {
-                    return n.nodeName === 'IMG' || (n.nodeName === 'A' && n.querySelector('img') && !n.getAttribute('href'));
-                })) {
-                    p.classList.add('gallery');
-                }
-            });
+            tagGalleries(content);
             scroller.scrollTop = 0;
             parallax();
             updateNav(slug);
@@ -632,25 +653,47 @@
         });
     });
 
+    // Gallery images open full-size; Esc, a click or the ✕ closes and focus goes back.
     var lightbox = $('#lightbox');
     if (lightbox) {
-        var lbImg = $('img', lightbox);
-        var closeLb = function () { lightbox.hidden = true; lbImg.removeAttribute('src'); };
+        var lbImg = $('img', lightbox), lbClose = $('.lightbox__close', lightbox), lbOpener = null;
+        var closeLb = function () {
+            if (lightbox.hidden) { return; }
+            lightbox.hidden = true;
+            lbImg.removeAttribute('src');
+            if (lbOpener && lbOpener.focus) { lbOpener.focus({ preventScroll: true }); }
+        };
         document.addEventListener('click', function (e) {
             var img = e.target.closest && e.target.closest('.gallery img');
-            if (img) {
-                e.preventDefault();
-                lbImg.src = img.currentSrc || img.src;
-                lightbox.hidden = false;
-                animateIn();
-            }
-        });
-        var animateIn = function () {
+            if (!img) { return; }
+            e.preventDefault();
+            lbOpener = img;
+            lbImg.src = img.currentSrc || img.src;
+            lbImg.alt = img.alt || '';
+            lightbox.hidden = false;
+            lbClose.focus({ preventScroll: true });
             if (!REDUCED && lbImg.animate) {
                 lbImg.animate([{ opacity: 0, transform: 'scale(.96)' }, { opacity: 1, transform: 'none' }], { duration: 220, easing: 'cubic-bezier(.2,.8,.2,1)' });
             }
-        };
+        });
+        document.addEventListener('keydown', function (e) {
+            if ((e.key === 'Enter' || e.key === ' ') && e.target.matches && e.target.matches('.gallery img')) {
+                e.preventDefault();
+                e.target.click();
+            }
+        });
         lightbox.addEventListener('click', closeLb);
-        document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !lightbox.hidden) { closeLb(); } });
+        document.addEventListener('keydown', function (e) {
+            if (lightbox.hidden) { return; }
+            if (e.key === 'Escape') { closeLb(); }
+            else if (e.key === 'Tab') { e.preventDefault(); lbClose.focus(); }   // keep focus in the viewer
+        });
+    }
+
+    // Standalone project pages (/projects/<slug>/): show the triangle frame around the image.
+    var soloStage = $('.solo__stage');
+    if (soloStage) {
+        Field.frame(soloStage, null, null);
+        tagGalleries(document);
     }
 })();
