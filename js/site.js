@@ -1,8 +1,9 @@
 /* ==========================================================================
    pedroloures.com · site behaviour
-   1. Background: an animated low-poly field in the current palette. It drifts,
-      leans away from the cursor, lights up around it and ripples on events.
-   2. Projects: a card's image grows to fill the screen while the triangle field
+   1. Background: an animated faceted honeycomb in the current palette. Hexagon
+      cells light up around the cursor and ripple on events; the triangle facets
+      inside each cell drift; cells shatter like glass where a project opens.
+   2. Projects: a card's image grows to fill the screen while the honeycomb
       breaks open around it and a panel rises with the write-up; closing shrinks
       it back into the card; ←/→ (or swipe) switch projects in place. Each
       project also has its own page (/projects/<slug>/) for sharing and search.
@@ -26,8 +27,12 @@
             return { ripple: function () {}, sweep: function () {}, frame: function () {}, unframe: function () {}, el: null };
         }
         var ctx = canvas.getContext('2d');
-        var W = 0, H = 0, dpr = 1, cell = 90, cols = 0, rows = 0;
-        var pts = [], tris = [], noise = [];
+        var W = 0, H = 0, dpr = 1, R = 46;
+        // Honeycomb: each cell is a hexagon cut into triangles of different sizes (a
+        // drifting inner point, plus extra cuts on some edges). Cells are the pieces
+        // (glow, ripples, the window that opens), triangles are the facets that move
+        // and catch the light, and they fly apart like glass when a cell breaks.
+        var cells = [];
         var ramp = toRgb((window.PORTFOLIO_THEME || {}).ramp || ['#0b2b33', '#0f5f63', '#0f8f7e', '#7fd6c6', '#f2b880']);
         var fromRamp = null, rampT0 = 0;
         var mouse = { x: 0.5, y: 0.35, tx: 0.5, ty: 0.35, px: -9999, py: -9999 };
@@ -47,10 +52,6 @@
                 return [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)];
             });
         }
-        function seeded(n) {               // stable per-triangle noise
-            var x = Math.sin(n * 127.1) * 43758.5453;
-            return (x - Math.floor(x) - 0.5) * 0.07;
-        }
 
         function build() {
             dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -59,31 +60,45 @@
             canvas.width = Math.round(W * dpr);
             canvas.height = Math.round(H * dpr);
             ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-            cell = Math.max(64, Math.min(120, W / (W < 700 ? 6 : 15)));
-            cols = Math.ceil(W / cell) + 3;
-            rows = Math.ceil(H / cell) + 4;
-            pts = [];
-            var s = 1;
-            var rnd = function () { s = (s * 16807) % 2147483647; return s / 2147483647; };
-            for (var y = 0; y < rows; y++) {
-                for (var x = 0; x < cols; x++) {
-                    var edge = x === 0 || y === 0 || x === cols - 1 || y === rows - 1;
-                    pts.push({
-                        bx: (x - 1) * cell + (edge ? 0 : (rnd() - 0.5) * cell * 0.75),
-                        by: (y - 1) * cell + (edge ? 0 : (rnd() - 0.5) * cell * 0.75),
-                        ph: rnd() * 6.283,
-                        amp: edge ? 0 : cell * 0.12
+            R = Math.max(34, Math.min(58, W / 28));
+            var hw = Math.sqrt(3) * R, vstep = R * 1.5;
+            var s0 = 7;
+            var rnd = function () { s0 = (s0 * 16807) % 2147483647; return s0 / 2147483647; };
+            var LIGHT = -2.3;                      // light from the top left
+            cells = [];
+            for (var row = -2; row * vstep < H + R * 4; row++) {
+                for (var q = -2; q * hw < W + hw * 3; q++) {
+                    var cx = q * hw + (row & 1 ? hw / 2 : 0), cy = row * vstep;
+                    // Outline: 6 corners, and on some edges an extra cut point.
+                    var ring = [];
+                    for (var k = 0; k < 6; k++) {
+                        var a = Math.PI / 180 * (60 * k - 30);
+                        ring.push({ x: Math.cos(a) * R, y: Math.sin(a) * R, slide: 0 });
+                        if (rnd() < 0.38) {
+                            var b = Math.PI / 180 * (60 * (k + 1) - 30), t = 0.3 + rnd() * 0.4;
+                            ring.push({
+                                x: (Math.cos(a) + (Math.cos(b) - Math.cos(a)) * t) * R,
+                                y: (Math.sin(a) + (Math.sin(b) - Math.sin(a)) * t) * R,
+                                ex: (Math.cos(b) - Math.cos(a)) * R, ey: (Math.sin(b) - Math.sin(a)) * R,
+                                slide: 0.12, ph: rnd() * 6.283
+                            });
+                        }
+                    }
+                    // One shading value per facet: how much it faces the light, plus a little noise.
+                    var facets = ring.map(function (p0, i) {
+                        var p1 = ring[(i + 1) % ring.length];
+                        var ang = Math.atan2((p0.y + p1.y) / 2, (p0.x + p1.x) / 2);
+                        return Math.cos(ang - LIGHT) * 0.07 + (rnd() - 0.5) * 0.035;
+                    });
+                    cells.push({
+                        x: cx, y: cy, ring: ring, facets: facets,
+                        drop: rnd(), spin: (rnd() - 0.5) * 1.1,             // how this cell breaks loose
+                        ox: (rnd() - 0.5) * R * 0.5, oy: (rnd() - 0.5) * R * 0.5,   // where the cuts meet
+                        ph: rnd() * 6.283, amp: R * 0.16,
+                        noise: (rnd() - 0.5) * 0.06
                     });
                 }
             }
-            tris = [];
-            for (var r = 0; r < rows - 1; r++) {
-                for (var c = 0; c < cols - 1; c++) {
-                    var i = r * cols + c, j = i + 1, k = i + cols, l = k + 1;
-                    if ((r + c) % 2) { tris.push([i, j, k], [j, l, k]); } else { tris.push([i, j, l], [i, l, k]); }
-                }
-            }
-            noise = tris.map(function (t, q) { return seeded(q); });
             if (hole) { hole.to = windowShape(); hole.from = hole.to; }   // resized or rotated while open
             draw(performance.now());
         }
@@ -107,66 +122,105 @@
             mouse.x += (mouse.tx - mouse.x) * 0.06;
             mouse.y += (mouse.ty - mouse.y) * 0.06;
             var shiftX = still ? 0 : (mouse.x - 0.5) * -18;
-            var shiftY = (still ? 0 : (mouse.y - 0.5) * -12) - Math.min(window.scrollY * 0.03, cell * 1.4);
+            var shiftY = (still ? 0 : (mouse.y - 0.5) * -12) - Math.min(window.scrollY * 0.03, R * 1.8);
             var time = still ? 0 : t;
 
-            // Expire effects
             effects = effects.filter(function (e) { return t - e.t0 < e.life; });
             if (fromRamp && t - rampT0 > 700) { fromRamp = null; }
 
             ctx.clearRect(0, 0, W, H);
             var win = holeAt(t);
+            var edge = ramp[0];
+            var outline = 'rgba(' + (edge[0] * 0.55 | 0) + ',' + (edge[1] * 0.55 | 0) + ',' + (edge[2] * 0.55 | 0) + ',0.55)';
+            var lit = ramp[ramp.length - 1];
+            var glint = 'rgb(' + lit[0] + ',' + lit[1] + ',' + lit[2] + ')';
 
-            var P = new Array(pts.length);
-            for (var n = 0; n < pts.length; n++) {
-                var p = pts[n];
-                P[n] = [
-                    p.bx + Math.sin(time * 0.00035 + p.ph) * p.amp + shiftX,
-                    p.by + Math.cos(time * 0.0003 + p.ph) * p.amp + shiftY
-                ];
-            }
+            for (var c = 0; c < cells.length; c++) {
+                var cell = cells[c];
+                var cx = cell.x + shiftX, cy = cell.y + shiftY;
+                if (cx < -R * 2 || cx > W + R * 2 || cy < -R * 2 || cy > H + R * 2) { continue; }
 
-            for (var q = 0; q < tris.length; q++) {
-                var tr = tris[q], A = P[tr[0]], B = P[tr[1]], C = P[tr[2]];
-                var cx = (A[0] + B[0] + C[0]) / 3, cy = (A[1] + B[1] + C[1]) / 3;
-                var v = 0.08 + 0.74 * (cx / W * 0.55 + (1 - cy / H) * 0.45) + noise[q];
-
-                if (FINE_POINTER && !still) {              // glow around the cursor
+                var v = 0.08 + 0.74 * (cx / W * 0.55 + (1 - cy / H) * 0.45) + cell.noise;
+                var glow = 0;
+                if (FINE_POINTER && !still) {              // cells light up around the cursor
                     var dx = cx - mouse.px, dy = cy - mouse.py, d = Math.sqrt(dx * dx + dy * dy);
-                    if (d < 230) { v += 0.2 * (1 - d / 230); }
+                    if (d < 230) { glow = 1 - d / 230; v += 0.2 * glow; }
                 }
                 for (var e = 0; e < effects.length; e++) {
                     var fx = effects[e], age = (t - fx.t0) / fx.life, fade = 1 - age, dist;
                     if (fx.type === 'ripple') {
                         dist = Math.abs(Math.sqrt((cx - fx.x) * (cx - fx.x) + (cy - fx.y) * (cy - fx.y)) - age * fx.reach);
                         if (dist < 120) { v += 0.26 * fade * (1 - dist / 120); }
-                    } else {                                // sweep across the screen
+                    } else {
                         var front = fx.dir > 0 ? -150 + age * (W + 300) : W + 150 - age * (W + 300);
                         dist = Math.abs(cx - front);
                         if (dist < 170) { v += 0.3 * (1 - dist / 170); }
                     }
                 }
-                var k = 1;                                  // shard scale
+
+                // Breaking: cells inside the window are gone. On its edge whole hexagons break
+                // loose one by one, the closer to the opening the more, and tumble outward.
+                var k = 1, awayX = 0, awayY = 0;
                 if (win) {
                     var ex = (cx - win.x) / win.rx, ey = (cy - win.y) / win.ry;
                     var ed = Math.sqrt(ex * ex + ey * ey);
                     if (ed < 1) { continue; }
-                    if (ed < 1.3) { k = (ed - 1) / 0.3; v += 0.12 * (1 - k); }
+                    if (ed < 1.4) {
+                        k = (ed - 1) / 0.4;
+                        if (k < cell.drop * 0.8) { continue; }        // this cell has fallen out
+                        v += 0.1 * (1 - k);
+                        awayX = ex / ed; awayY = ey / ed;
+                    }
                 }
-                ctx.fillStyle = rampColor(v, t);
+                var loose = 1 - k;
+                ctx.save();
+                ctx.translate(cx + awayX * loose * R * 0.5, cy + awayY * loose * R * 0.5);
+                if (loose > 0) {
+                    ctx.rotate(cell.spin * loose);
+                    var sc = 1 - 0.2 * loose;
+                    ctx.scale(sc, sc);
+                }
+
+                // The point where the cuts meet drifts inside the cell, so the facets keep moving.
+                var px = cell.ox + Math.sin(time * 0.00045 + cell.ph) * cell.amp;
+                var py = cell.oy + Math.cos(time * 0.0004 + cell.ph) * cell.amp;
+                var ring = cell.ring, n = ring.length;
+                var contrast = 1 + glow * 1.6;          // facets catch more light near the cursor
+                var tilt = cell.spin * loose * 0.2;     // a loose cell turns its face to the light
+
+                for (var i = 0; i < n; i++) {
+                    var a = ring[i], b = ring[(i + 1) % n];
+                    var ax = a.x, ay = a.y, bx = b.x, by = b.y;
+                    if (a.slide && !still) { var sa = Math.sin(time * 0.0006 + a.ph) * a.slide; ax += a.ex * sa; ay += a.ey * sa; }
+                    if (b.slide && !still) { var sb = Math.sin(time * 0.0006 + b.ph) * b.slide; bx += b.ex * sb; by += b.ey * sb; }
+                    ctx.fillStyle = rampColor(v + cell.facets[i] * contrast + tilt, t);
+                    ctx.beginPath();
+                    ctx.moveTo(px, py);
+                    ctx.lineTo(ax, ay);
+                    ctx.lineTo(bx, by);
+                    ctx.closePath();
+                    ctx.fill();
+                    ctx.strokeStyle = ctx.fillStyle; ctx.lineWidth = 1; ctx.stroke();
+                }
+
+                // Cell walls; a loose cell's rim catches the light like a glass edge.
                 ctx.beginPath();
-                if (k < 1) {
-                    ctx.moveTo(cx + (A[0] - cx) * k, cy + (A[1] - cy) * k);
-                    ctx.lineTo(cx + (B[0] - cx) * k, cy + (B[1] - cy) * k);
-                    ctx.lineTo(cx + (C[0] - cx) * k, cy + (C[1] - cy) * k);
-                } else {
-                    ctx.moveTo(A[0], A[1]); ctx.lineTo(B[0], B[1]); ctx.lineTo(C[0], C[1]);
+                for (var j = 0; j < 6; j++) {
+                    var ang = Math.PI / 180 * (60 * j - 30);
+                    var X = Math.cos(ang) * R, Y = Math.sin(ang) * R;
+                    if (j) { ctx.lineTo(X, Y); } else { ctx.moveTo(X, Y); }
                 }
                 ctx.closePath();
-                ctx.fill();
-                ctx.strokeStyle = ctx.fillStyle;
-                ctx.lineWidth = 1;
+                if (loose > 0) {
+                    ctx.strokeStyle = glint;
+                    ctx.globalAlpha = 0.3 + 0.5 * loose;
+                    ctx.lineWidth = 1.5;
+                } else {
+                    ctx.strokeStyle = outline;
+                    ctx.lineWidth = 2;
+                }
                 ctx.stroke();
+                ctx.restore();
             }
         }
 
