@@ -66,7 +66,7 @@ Five-act haptic VR story on climate migration · Unity lead and project engineer
   - Built shaders (including the sand) and rain particle effects with optimization tests; imported and configured assets, including the ocean, lent from my own Asset Store library where licenses allowed
   - Helped test the release build on my own VR headset
 - Leadership:
-  - Moved the project from Unreal to Unity when I joined, to lower the deadline risk on the program's first big project with outside partners and reach the July 2026 showcase
+  - Moved the project from Unreal to Unity when I joined, to lower the deadline risk on the program's first big project with outside partners and reach SIGGRAPH 2026 in July
   - Main developer on the levels for part of the project, and on call as backup throughout the year
   - Part of the planning team: kept the GitHub project board in order, helped divide tasks around weekly check-ins, and onboarded the students into the project
 - Links:
