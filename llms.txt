@@ -23,7 +23,7 @@ This is a plain-text summary of pedroloures.com for recruiters, hiring tools and
 - Unity developer since 2012; studied in Brazil (PUC) and at Centennial College.
 - Unity lead (D2Studios, volunteer) on Anchored Memories, a full-body haptic VR experience about climate migration, showcased at UT Austin's Texas Immersive Institute in July 2026.
 - SBGames 2013: his capstone game Loneliness took 3rd place in the Popular Vote and won Best Short Paper in the Art & Design track; it was later featured in a PlayTV / Indiana Produções documentary on the history of video games in Brazil.
-- Client work at D2R Studios for Fiat (a dealership Quality Manager training sim with 76 real-world scenarios at launch, and a 3D sticker-design kiosk) and for Vale (a three-screen presentation system first built in 2012 and still in use).
+- Shipped commercial client work at D2R Studios for Fiat (a dealership Quality Manager training sim with 76 real-world scenarios at launch, and a 3D sticker-design kiosk) and for Vale (a three-screen presentation system first built in 2012 and still in use).
 - Built a Blender facial-expression add-on that is still part of an animation pipeline.
 - Sole programmer on VR Carnival: four seated VR minigames built in under a month.
 - Led a team of newer developers (Coma game jam) and moved a project from Unreal to Unity to hit a showcase deadline (Anchored Memories).
