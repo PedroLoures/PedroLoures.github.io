@@ -24,8 +24,9 @@ This is a plain-text summary of pedroloures.com for recruiters, hiring tools and
 - Based in Toronto, Canada. Unity developer since 2012; most of his projects were made in Brazil, where he studied at PUC, before Centennial College in Toronto.
 - Unity lead (D2R Studios, volunteer) on Anchored Memories, a full-body haptic VR experience about climate migration, showcased at UT Austin's Texas Immersive Institute in July 2026.
 - SBGames 2013: his capstone game Loneliness took 3rd place in the Popular Vote and won Best Short Paper in the Art & Design track; it was later featured in a PlayTV / Indiana Produções documentary on the history of video games in Brazil.
-- Shipped commercial client work at D2R Studios for Fiat (a dealership Quality Manager training sim with 76 real-world scenarios at launch, and a 3D sticker-design kiosk) and for Vale (a three-screen presentation system first built in 2012 and still in use).
-- Built a Blender facial-expression add-on that is still part of an animation pipeline.
+- When he programs, he works hands-on across Unity, not only code: level setup, plugin integration and the rest of the editor work.
+- Shipped commercial client work at D2R Studios for Fiat (dev lead on a dealership Quality Manager training sim with 76 real-world scenarios at launch, and a 3D sticker-design kiosk) and for Vale (a three-screen presentation system first built in 2012 and still in use).
+- Built a Blender facial-expression add-on at D2R Studios in 2019 for the studio's animator, who still uses it.
 - Sole programmer on VR Carnival: four seated VR minigames built in under a month.
 - Led a team of newer developers (Coma game jam) and moved a project from Unreal to Unity to hit a showcase deadline (Anchored Memories).
 
@@ -104,6 +105,7 @@ Four seated VR minigames in under a month · sole programmer
 Data-driven training simulation for Fiat dealership Quality Managers
 
 - Page: https://pedroloures.com/projects/appfiat-treinamento/
+- Role: Dev Lead · Programmer · Game Design team
 - Engine / tools: Unity
 - For: Fiat · D2R Studios
 - Tags: Training sim, Client: Fiat
@@ -114,6 +116,8 @@ Data-driven training simulation for Fiat dealership Quality Managers
 - Programming:
   - Content pipeline: Fiat's Excel scenario sheets → JSON → NoSQL database, downloaded by Unity at runtime
   - 76 real-world scenarios at launch, with a web admin so the client can add more without a new build
+- Leadership:
+  - Dev lead and one of the main programmers, while also designing the game as part of a team where everyone helped shape it
 
 ### Loneliness (2013)
 
@@ -154,19 +158,21 @@ Three-screen presentation system controlled from a tablet · 2012 → 2019
   - In one month for the 2019 version: rebuilt the tablet app from scratch, moved the PC app off OnGUI and added real networking with UNet
   - Still in use today, more than a decade after the first version
 
-### Blender Expressions Add-on
+### Blender Expressions Add-on (2019)
 
-Python add-on that speeds up facial-expression keyframing for animators
+Python add-on that speeds up facial-expression keyframing · built for D2R Studios' animator, 2019
 
 - Page: https://pedroloures.com/projects/blenderplug/
+- Role: Tool designer · Programmer
 - Engine / tools: Blender · Python
+- For: D2R Studios
 - Tags: Animation tool, Python, Still in use
 - Design:
-  - Tool design around the animators' workflow: every facial expression for a character in one panel, picked with a click instead of digging through textures
+  - Designed around one animator's workflow: every facial expression for a character in one panel, picked with a click instead of digging through textures
 - Programming:
   - Lists every facial texture for a character's face parts, read from a folder naming convention, so animators pick expressions from one panel
   - Saves around 3 clicks per keyframe when swapping faces, plus a one-click keyframe button
-  - Built as a side project alongside my regular work, fitted into the studio's existing animation pipeline, and still in use today
+  - Built as a side project alongside my regular work, fitted into the studio's existing animation pipeline; the animator it was made for still uses it
 
 ### Coma · College Game Jam (2021)
 
@@ -216,7 +222,7 @@ Educational tower defense game about the food chain
 - Tags: Tower defense, Educational
 - Design:
   - Teaches the food chain through combat rules: each level of the chain is strong against the one it feeds on
-  - Humans hit everyone, and decomposers boost the gold earned from anything that dies in their area
+  - Humans can attack anything, to show they sit at the top of the chain, and decomposers boost the gold earned from anything that dies in their area
 - Programming:
   - Waypoint movement system, a concept I still use today
 - Leadership:
