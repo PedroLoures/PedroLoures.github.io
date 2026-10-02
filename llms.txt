@@ -1,10 +1,10 @@
 # Pedro Loures: Game Designer and Unity Developer
 
-> Pedro Loures, game designer and Unity developer since 2012: haptic VR at UT Austin, serious games for Fiat and Vale, tools still in production, and an SBGames-awarded capstone game.
+> Pedro Loures, game designer and Unity developer since 2012: haptic VR at UT Austin, serious games for Fiat and Vale, tools still in production and an award-winning SBGames capstone game.
 
 Full name: Pedro Henrique Zarranz Loures (goes by Pedro Loures).
 
-This is a plain-text summary of pedroloures.com for recruiters, hiring tools and AI assistants. Every project below has its own page with videos, images, code and a postmortem.
+This is a plain-text summary of pedroloures.com for recruiters, hiring tools and AI assistants. Every project below has its own page with more detail, such as videos, images, code or a postmortem.
 
 - Website: https://pedroloures.com
 - Email: pedroh.z.loures@gmail.com
@@ -18,14 +18,14 @@ This is a plain-text summary of pedroloures.com for recruiters, hiring tools and
 
 ## Summary
 
-**As a game designer:** I design play you can feel. Game designer and Unity developer since 2012. My work spans my college capstone Loneliness, which won Best Short Paper and 3rd in the Popular Vote at SBGames 2013, a persuasion-driven training sim for Fiat, seated VR minigames, and most recently full-body haptic VR at UT Austin's Texas Immersive Institute. I prototype every idea myself, so it gets tested in play, not just on paper.
+**As a game designer (in his words):** I design play you can feel. Game designer and Unity developer since 2012. My work spans my college capstone Loneliness (Best Short Paper and 3rd in the Popular Vote at SBGames 2013), a persuasion-driven training sim for Fiat, seated VR minigames, and most recently full-body haptic VR at UT Austin's Texas Immersive Institute. I prototype every idea myself, so it gets tested in play, not just on paper.
 
-**As a programmer:** I turn game designs into systems that ship. Unity developer since 2012: gameplay systems, VR interaction, editor and Blender tools, networking and data pipelines, for studios, schools and clients like Fiat and Vale. A Vale presentation system and a Blender animation add-on I built are still in use. Most recently I was Unity lead on Anchored Memories, a full-body haptic VR experience at UT Austin.
+**As a programmer (in his words):** I turn game designs into systems that ship. Unity developer since 2012: gameplay systems, VR interaction, editor and Blender tools, networking and data pipelines, for studios, schools and clients like Fiat and Vale. A Vale presentation system and a Blender animation add-on I built are still in use. Most recently I was Unity lead on Anchored Memories, a full-body haptic VR experience at UT Austin.
 
 ## Key facts
 
-- Based in Toronto, Canada. Unity developer since 2012; most of his projects were made in Brazil, where he studied at PUC, before Centennial College in Toronto.
-- Unity lead and project engineer (independent partner, volunteer) on Anchored Memories, a five-act haptic VR story about climate migration showcased at UT Austin's Texas Immersive Institute in July 2026: engineered the project's foundation and the base code for VR interactions and audio, set up the five acts the team built on, and was part of the planning team and onboarded students on an interdisciplinary team.
+- Based in Toronto, Canada. Unity developer since 2012; most of his projects were made in Brazil, where he studied at PUC before attending Centennial College in Toronto.
+- Unity lead and project engineer (independent partner, volunteer) on Anchored Memories, a five-act haptic VR story about climate migration showcased at UT Austin's Texas Immersive Institute in July 2026: engineered the project's foundation and the base code for VR interactions and audio, set up the five acts the team built on, was part of the planning team, and onboarded students onto the interdisciplinary team.
 - SBGames 2013: his capstone game Loneliness took 3rd place in the Popular Vote and won Best Short Paper in the Art & Design track; it was later featured in a PlayTV / Indiana Produções documentary on the history of video games in Brazil.
 - When he programs, he works hands-on across Unity, not only code: level setup, plugin integration and the rest of the editor work.
 - Shipped commercial client work at D2R Studios for Fiat (dev lead on a dealership Quality Manager training sim with 76 real-world scenarios at launch, and a 3D sticker-design kiosk) and for Vale (a three-screen presentation system first built in 2012 and still in use).
@@ -55,13 +55,13 @@ Five-act haptic VR story on climate migration · Unity lead and project engineer
 - Design:
   - Part of the design team on the technical side: chose the tech and approach for bringing Erin Reilly's script and concept to VR
   - Turned the five acts into a technical structure, with weather that mirrors hurricane categories 1 to 5 as the sea rises over the years
-  - Researched how to mimic each storm level, then gave every act inspector controls for the sea and other elements, so the team could shape the weather without code
+  - Researched how to mimic each storm level, then gave every act Inspector controls for the sea and other elements, so the team could shape the weather without code
   - Set the project up so students new to game development could step in and contribute quickly
 - Programming:
   - Engineered the project's foundation: the barebones architecture plus the base code for VR interactions and audio that the team built on
   - Set up the structure of all five acts as separate spaces, each with its own environment prepared for the ocean changes, ready for the team's level design
   - Helped plug the haptics designer's bHaptics SDK work into the Unity project
-  - Shaders (including the sand), rain particle effects with optimization tests, and importing and configuring assets, including the ocean, lent from my own Asset Store library where licenses allowed
+  - Built shaders (including the sand) and rain particle effects with optimization tests; imported and configured assets, including the ocean, lent from my own Asset Store library where licenses allowed
   - Helped test the release build on my own VR headset
 - Leadership:
   - Moved the project from Unreal to Unity when I joined, to lower the deadline risk on the program's first big project with outside partners and reach the July 2026 showcase
@@ -72,7 +72,7 @@ Five-act haptic VR story on climate migration · Unity lead and project engineer
 
 ### Dream Arcade Simulator (2021)
 
-Arcade management sim · Centennial College capstone, team of 5
+Arcade management sim · Centennial College capstone, team of five
 
 - Page: https://pedroloures.com/projects/dream-arcade-simulator/
 - Role: Gameplay Programmer
@@ -83,7 +83,7 @@ Arcade management sim · Centennial College capstone, team of 5
 - Design:
   - Turn-based day/night loop: plan and build your arcade at night with time stopped, then watch robot customers play it out during the day
   - Customers with game preferences, patience and a temper: wait too long and they leave, sometimes breaking machines you'll pay to repair
-  - Win on money and fame, with a The Sims-inspired cheat code system as an escape hatch
+  - Win on money and fame, with a cheat code system inspired by The Sims as an escape hatch
 - Programming:
   - Day/night cycle with skybox, exposure and light blending
   - The whole night phase: shop with tabs, grid placement, move, rotate and sell
@@ -95,7 +95,7 @@ Arcade management sim · Centennial College capstone, team of 5
 Four seated VR minigames in under a month · sole programmer
 
 - Page: https://pedroloures.com/projects/vr-carnival/
-- Role: Sole Programmer, Game Design
+- Role: Sole Programmer · Game Designer
 - Engine / tools: Unity · SteamVR
 - Team size: 3
 - For: Centennial College VR course
@@ -121,7 +121,7 @@ Data-driven training simulation for Fiat dealership Quality Managers
 - For: Fiat · D2R Studios
 - Tags: Training sim, Client: Fiat
 - Design:
-  - Turned the around 25 reports a Quality Manager reads into two headline indicators, with the full detail one click away
+  - Turned the roughly 25 reports a Quality Manager reads into two headline indicators, with the full detail one click away
   - Influence mechanic: a Quality Manager can't give orders, only persuade, so good dialogue choices earn influence that makes people act faster
   - Daily difficulty follows a customizable Fibonacci curve across a 7-day cycle, so by day 7 the player can face up to 13 difficulty-1 issues or fewer, harder ones (rated up to 4)
 - Programming:
@@ -132,7 +132,7 @@ Data-driven training simulation for Fiat dealership Quality Managers
 
 ### Loneliness (2013)
 
-Shadow-puzzle platformer · SBGames 2013: 3rd in Popular Vote + Best Short Paper
+Shadow-puzzle platformer · SBGames 2013: 3rd in the Popular Vote + Best Short Paper
 
 - Page: https://pedroloures.com/projects/loneliness/
 - Role: Game Designer · Level Designer · Programmer
@@ -154,7 +154,7 @@ Shadow-puzzle platformer · SBGames 2013: 3rd in Popular Vote + Best Short Paper
 Three-screen presentation system controlled from a tablet · 2012 → 2019
 
 - Page: https://pedroloures.com/projects/appvale-portotubarao/
-- Role: Desktop developer (2012) · Rebuild developer (2019)
+- Role: Desktop Developer (2012) · Rebuild Developer (2019)
 - Engine / tools: Unity
 - Platform: Mac + iPad (2012) · PC + Android (2019)
 - For: Vale · Zor Design · D2R Studios
@@ -174,7 +174,7 @@ Three-screen presentation system controlled from a tablet · 2012 → 2019
 Python add-on that speeds up facial-expression keyframing · built for D2R Studios' animator, 2019
 
 - Page: https://pedroloures.com/projects/blenderplug/
-- Role: Tool designer · Programmer
+- Role: Tool Designer · Programmer
 - Engine / tools: Blender · Python
 - For: D2R Studios
 - Tags: Animation tool, Python, Still in use
@@ -202,7 +202,7 @@ Horror game jam on the theme “Another World” · led a team of newer develope
   - Procedural maze generator (adapted from Kodeco's maze tutorial) whose output was saved and then decorated by hand
   - Reusable trigger system built on UnityEvents, with cooldowns and one-shot options
 - Leadership:
-  - Led a team of newer students (placed there by the coordinator to lead) and set up a prefab workflow so the artists could do the level design themselves
+  - Led a team of newer students (the coordinator placed me there to lead it) and set up a prefab workflow so the artists could do the level design themselves
 - Links:
   - Play on itch.io: https://b-chayson.itch.io/coma
 
@@ -217,7 +217,7 @@ Educational game where players solve Greek-myth challenges by writing Lua
 - Tags: Educational, Lua, Unity
 - Design:
   - Wrote every level around a Greek myth: each part opens with a tale, then challenges the player to make it happen in code
-  - Built the concept around the CS student I was helping: she loved Greek mythology, so every level retells a myth, to keep her motivated to finish
+  - Built the concept around the CS student I was helping: she loved Greek mythology, so every level retells a myth to keep her motivated
 - Programming:
   - Embedded a Lua interpreter in Unity, so players' code compiles and runs inside the game
   - Checks each solution against the expected output, with custom hint messages or the compiler's own errors
@@ -237,7 +237,7 @@ Educational tower defense game about the food chain
 - Programming:
   - Waypoint movement system, a concept I still use today
 - Leadership:
-  - Lead programmer, game designer and level designer on a project planned and built in under 6 months
+  - Lead programmer, game designer and level designer on a project planned and built in under six months
 
 ### Fiat Personalização
 
@@ -295,14 +295,14 @@ Story-driven 3D adventure · my first 3D game
 - Page: https://pedroloures.com/projects/digitalwonder/
 - Tags: 3D adventure, Story
 - Design:
-  - Wrote the world and story: students trapped in a virus-infected digital world, guided by a two-faced royal companion
+  - Wrote the world and story: students trapped in a virus-infected digital world, guided by a royal companion with two faces
 
 ### Recifuturo
 
 Educational puzzle adventure in Game Maker · my first game
 
 - Page: https://pedroloures.com/projects/recifuturo/
-- Role: Game Design · Level Design · Programming · Sound Effects
+- Role: Game Designer · Level Designer · Programmer · Sound Effects
 - Engine / tools: Game Maker
 - Tags: Puzzle adventure, Game Maker
 - Design:
