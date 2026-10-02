@@ -22,7 +22,7 @@ This is a plain-text summary of pedroloures.com for recruiters, hiring tools and
 ## Key facts
 
 - Based in Toronto, Canada. Unity developer since 2012; most of his projects were made in Brazil, where he studied at PUC, before Centennial College in Toronto.
-- Unity lead (D2R Studios, volunteer) on Anchored Memories, a full-body haptic VR experience about climate migration, showcased at UT Austin's Texas Immersive Institute in July 2026.
+- Unity lead and project engineer (D2R Studios, volunteer) on Anchored Memories, a five-act haptic VR story about climate migration showcased at UT Austin's Texas Immersive Institute in July 2026: engineered the project's foundation, built the five acts, coded the VR interactions, audio base and haptics bridge, and onboarded a mostly student team.
 - SBGames 2013: his capstone game Loneliness took 3rd place in the Popular Vote and won Best Short Paper in the Art & Design track; it was later featured in a PlayTV / Indiana Produções documentary on the history of video games in Brazil.
 - When he programs, he works hands-on across Unity, not only code: level setup, plugin integration and the rest of the editor work.
 - Shipped commercial client work at D2R Studios for Fiat (dev lead on a dealership Quality Manager training sim with 76 real-world scenarios at launch, and a 3D sticker-design kiosk) and for Vale (a three-screen presentation system first built in 2012 and still in use).
@@ -40,22 +40,29 @@ Listed from most to least relevant. "Design" and "Programming" list what Pedro d
 
 ### Anchored Memories (2026)
 
-Haptic VR journey on climate migration · Unity lead · UT Austin, 2026
+Five-act haptic VR story on climate migration · Unity lead and project engineer · UT Austin, 2026
 
 - Page: https://pedroloures.com/projects/anchored-memories/
-- Role: Unity Lead (D2R Studios, volunteer)
+- Role: Unity Lead · Project Engineer (D2R Studios, volunteer)
 - Engine / tools: Unity
 - Platform: VR + bHaptics TactSuit X40
 - Team size: 12+ (TXI, D2R Studios, UT Austin advisors)
 - For: Texas Immersive Institute, UT Austin
 - Tags: Haptic VR, Unity, 2026
 - Design:
-  - Narrative VR in five acts, where spatial audio and full-body haptics turn memory and displacement into something the player physically feels
-  - Built for showcase audiences, with a research layer that pairs the experience with biometric feedback
+  - Designed how the five acts are built: each is a moment in a girl's life with her dad and their Texas home, with weather that mirrors hurricane categories 1 to 5 as the sea rises over the years
+  - Researched how to mimic each storm level, then gave every act inspector controls for the sea and other elements, so the team could shape the weather without code
+  - Set the project up so students with no game-development experience could step in and fill in the blanks
 - Programming:
-  - As Unity lead, cut production time for a small, part-time team by bringing in assets from my own library
+  - Engineered the project's foundation: the barebones architecture, VR base interactions and audio base code the rest of the team builds on
+  - Coded the bridge that brings the haptics designer's patterns into Unity for the bHaptics TactSuit X40
+  - Built all five acts as separate, ready-to-work spaces, each with its own environment prepared for the ocean changes
+  - Shaders, texturing, rain particle effects with optimization tests, and importing and configuring assets, including the ocean, lent from my own Asset Store library where licenses allowed
+  - Now tuning the release build for the best settings without direct access to the target hardware, testing through rounds of builds with the team
 - Leadership:
   - Moved the project from Unreal to Unity when I joined, so a small, part-time team could reach a working build for the July 2026 showcase
+  - Main developer on the levels for more than half of the project, and on call as backup for the whole year
+  - Set up and maintained the GitHub project board, supported the Scrum Master with planning and task breakdown, and onboarded the students into the project
 - Links:
   - Official project page · Texas Immersive Institute: https://immersive.moody.utexas.edu/projects/anchored-memories
 
