@@ -1,0 +1,291 @@
+# Pedro Loures: Game Designer and Unity Developer
+
+> Pedro Loures, game designer and Unity developer since 2012: haptic VR at UT Austin, serious games for Fiat and Vale, tools still in production, and an SBGames-awarded capstone game.
+
+This is a plain-text summary of pedroloures.com for recruiters, hiring tools and AI assistants. Every project below has its own page with videos, images, code and a postmortem.
+
+- Website: https://pedroloures.com
+- Email: pedroh.z.loures@gmail.com
+- LinkedIn: https://www.linkedin.com/in/pedroloures/
+- GitHub: https://github.com/PedroLoures
+- Portfolio PDF (game design): https://pedroloures.com/attachments/pedro-loures-game-design.pdf
+- Portfolio PDF (programming): https://pedroloures.com/attachments/pedro-loures-programming.pdf
+- Open to: Game design, Unity and XR roles, and collaborations
+
+## Summary
+
+**As a game designer:** I design play you can feel. Game designer and Unity developer since 2012. My work spans my college capstone Loneliness, which won Best Short Paper and 3rd in the Popular Vote at SBGames 2013, a persuasion-driven training sim for Fiat, seated VR minigames, and most recently full-body haptic VR at UT Austin's Texas Immersive Institute. I prototype every idea myself, so it gets tested in play, not just on paper.
+
+**As a programmer:** I turn game designs into systems that ship. Unity developer since 2012: gameplay systems, VR interaction, editor and Blender tools, networking and data pipelines, for studios, schools and clients like Fiat and Vale. A Vale presentation system and a Blender animation add-on I built are still in use. Most recently I was Unity lead on Anchored Memories, a full-body haptic VR experience at UT Austin.
+
+## Key facts
+
+- Unity developer since 2012; studied in Brazil (PUC) and at Centennial College.
+- Unity lead (D2Studios, volunteer) on Anchored Memories, a full-body haptic VR experience about climate migration, showcased at UT Austin's Texas Immersive Institute in July 2026.
+- SBGames 2013: his capstone game Loneliness took 3rd place in the Popular Vote and won Best Short Paper in the Art & Design track; it was later featured in a PlayTV / Indiana Produções documentary on the history of video games in Brazil.
+- Client work at D2R Studios for Fiat (a dealership Quality Manager training sim with 76 real-world scenarios at launch, and a 3D sticker-design kiosk) and for Vale (a three-screen presentation system first built in 2012 and still in use).
+- Built a Blender facial-expression add-on that is still part of an animation pipeline.
+- Sole programmer on VR Carnival: four seated VR minigames built in under a month.
+- Led a team of newer developers (Coma game jam) and moved a project from Unreal to Unity to hit a showcase deadline (Anchored Memories).
+
+## Skills
+
+Game design, Systems & mechanics, Level design, Narrative, Prototyping, Unity, C#, VR / XR, Haptics, Gameplay systems, Tools (Python, Blender add-ons), Networking & data pipelines, Team leadership
+
+## Projects
+
+Listed from most to least relevant. "Design" and "Programming" list what Pedro did in each discipline, in his own words.
+
+### Anchored Memories (2026)
+
+Haptic VR journey on climate migration · Unity lead · UT Austin, 2026
+
+- Page: https://pedroloures.com/projects/anchored-memories/
+- Role: Unity Lead (D2Studios, volunteer)
+- Engine / tools: Unity
+- Platform: VR + bHaptics TactSuit X40
+- Team size: 12+ (TXI, D2Studios, UT Austin advisors)
+- For: Texas Immersive Institute, UT Austin
+- Tags: Haptic VR, Unity, 2026
+- Design:
+  - Narrative VR in five acts, where spatial audio and full-body haptics turn memory and displacement into something the player physically feels
+  - Built for showcase audiences, with a research layer that pairs the experience with biometric feedback
+- Programming:
+  - As Unity lead, cut production time for a small, part-time team by bringing in assets from my own library
+- Leadership:
+  - Moved the project from Unreal to Unity when I joined, so a small, part-time team could reach a working build for the July 2026 showcase
+- Links:
+  - Official project page · Texas Immersive Institute: https://immersive.moody.utexas.edu/projects/anchored-memories
+
+### Dream Arcade Simulator (2021)
+
+Arcade management sim · Centennial College capstone, team of 5
+
+- Page: https://pedroloures.com/projects/dream-arcade-simulator/
+- Role: Gameplay Programmer
+- Engine / tools: Unity
+- Team size: 5
+- For: Centennial College capstone
+- Tags: Management sim, Unity, 2021
+- Design:
+  - Turn-based day/night loop: plan and build your arcade at night with time stopped, then watch robot customers play it out during the day
+  - Customers with game preferences, patience and a temper: wait too long and they leave, sometimes breaking machines you'll pay to repair
+  - Win on money and fame, with a The Sims-inspired cheat code system as an escape hatch
+- Programming:
+  - Day/night cycle with skybox, exposure and light blending
+  - The whole night phase: shop with tabs, grid placement, move, rotate and sell
+  - Audio manager with fade-in/out jobs, and a data-driven cheat code system using UnityEvents
+  - Fixed an AI overheating issue caused by objects that weren't being disposed
+
+### VR Carnival
+
+Four seated VR minigames in under a month · sole programmer
+
+- Page: https://pedroloures.com/projects/vr-carnival/
+- Role: Sole Programmer, Game Design
+- Engine / tools: Unity · SteamVR
+- Team size: 3
+- For: Centennial College VR course
+- Tags: VR, 4 minigames, Sole programmer
+- Design:
+  - Designed for small rooms: every minigame is played seated, but each one is physical in a different way
+  - Pitched and designed Whack-a-Mole 360 and Simon Says; built all four games
+  - Exposed every gameplay value so we could tune difficulty and balance through playtesting
+- Programming:
+  - MiniGameManager singleton base class with overridable lifecycle hooks, so only one minigame runs at a time
+  - Dissolve shader effect for materializing the bow and hammer in the player's hand
+  - Extended SteamVR's interaction samples (grabbing, bow, buttons) into four distinct games
+- Leadership:
+  - On a short-handed team, took on all the programming and scoped the project to four core games in under a month, polishing only after all four were built
+
+### Fiat Quality Manager Training
+
+Data-driven training simulation for Fiat dealership Quality Managers
+
+- Page: https://pedroloures.com/projects/appfiat-treinamento/
+- Engine / tools: Unity
+- For: Fiat · D2R Studios
+- Tags: Training sim, Client: Fiat
+- Design:
+  - Turned the around 25 reports a Quality Manager reads into two headline indicators, with the full detail one click away
+  - Influence mechanic: a Quality Manager can't give orders, only persuade, so good dialogue choices earn influence that makes people act faster
+  - Daily difficulty follows a customizable Fibonacci curve across a 7-day cycle, so by day 7 the player can face up to 13 difficulty-1 issues or fewer, harder ones (rated up to 4)
+- Programming:
+  - Content pipeline: Fiat's Excel scenario sheets → JSON → NoSQL database, downloaded by Unity at runtime
+  - 76 real-world scenarios at launch, with a web admin so the client can add more without a new build
+
+### Loneliness (2013)
+
+Shadow-puzzle platformer · SBGames 2013: 3rd in Popular Vote + Best Short Paper
+
+- Page: https://pedroloures.com/projects/loneliness/
+- For: PUC capstone
+- Tags: Puzzle platformer, SBGames award, 2013
+- Design:
+  - Shadows replay your earlier moves, and the dark is the only thing that can hurt you: a personal theme expressed through mechanics, inspired by The Company of Myself
+  - Darkness as the only threat: when pushed to add enemies, I kept the design and committed to 18 stages instead of 3 in exchange
+  - 3rd place in SBGames 2013's Popular Vote with only three tutorial levels, plus Best Short Paper in the Art & Design track
+- Programming:
+  - Shadow replay system: moved from frame-data recording to input recording to fix desyncs on frame drops (the postmortem covers what that late rewrite cost)
+- Links:
+  - SBGames 2013 placements (search for Solidão): http://www.sbgames.org/sbgames2013/festival/post.php?postId=957
+  - Short paper (Portuguese): http://www.sbgames.org/sbgames2013/proceedings/artedesign/02-dt-short.pdf
+  - Best Short Paper certificate: https://pedroloures.com/attachments/CertificadoTrilhaArtDesign_shortpaper_best.pdf
+
+### Vale · Porto de Tubarão (2012 / 2015 / 2019)
+
+Three-screen presentation system controlled from a tablet · 2012 → 2019
+
+- Page: https://pedroloures.com/projects/appvale-portotubarao/
+- Role: Desktop developer (2012) · Rebuild developer (2019)
+- Engine / tools: Unity
+- Platform: Mac + iPad (2012) · PC + Android (2019)
+- For: Vale · Zor Design · D2R Studios
+- Tags: Multi-screen app, Client: Vale, Still in use
+- Design:
+  - Presentation experience for a corporate visitor room: images, videos and data flow across three borderless screens, driven by a presenter from a tablet
+  - Content updates need no developer: drop correctly named images in and rebuild
+  - Still in use today, more than a decade after the first version
+- Programming:
+  - Custom sprite system written before Unity had native 2D
+  - Content pipeline through the Resources folder: new images only need the right file names, with no code or level changes
+  - In one month for the 2019 version: rebuilt the tablet app from scratch, moved the PC app off OnGUI and added real networking with UNet
+  - Still in use today, more than a decade after the first version
+
+### Blender Expressions Add-on
+
+Python add-on that speeds up facial-expression keyframing for animators
+
+- Page: https://pedroloures.com/projects/blenderplug/
+- Engine / tools: Blender · Python
+- Tags: Animation tool, Python, Still in use
+- Design:
+  - Tool design around the animators' workflow: every facial expression for a character in one panel, picked with a click instead of digging through textures
+- Programming:
+  - Lists every facial texture for a character's face parts, read from a folder naming convention, so animators pick expressions from one panel
+  - Saves around 3 clicks per keyframe when swapping faces, plus a one-click keyframe button
+  - Built as a side project alongside my regular work, fitted into the studio's existing animation pipeline, and still in use today
+
+### Coma · College Game Jam (2021)
+
+Horror game jam on the theme “Another World” · led a team of newer developers
+
+- Page: https://pedroloures.com/projects/gamejamhorror/
+- Role: Team Lead · Programmer
+- Engine / tools: Unity
+- Platform: PC (itch.io)
+- For: College midterm game jam
+- Tags: Horror, Game jam, Team lead
+- Design:
+  - 2D sprites that always face the player inside a 3D maze: an unsettling look the team could actually produce on a jam timeline
+  - Trap and scare toolkit (flickering flashlight, inverted controls, slow/speed zones, jump scares) that level designers combine freely
+- Programming:
+  - Procedural maze generator (adapted from Kodeco's maze tutorial) whose output was saved and then decorated by hand
+  - Reusable trigger system built on UnityEvents, with cooldowns and one-shot options
+- Leadership:
+  - Led a team of newer students (placed there by the coordinator to lead) and set up a prefab workflow so the artists could do the level design themselves
+- Links:
+  - Play on itch.io: https://b-chayson.itch.io/coma
+
+### Mitologia da Programação
+
+Educational game where players solve Greek-myth challenges by writing Lua
+
+- Page: https://pedroloures.com/projects/mitologiaprog/
+- Engine / tools: Unity · embedded Lua
+- Team size: 2
+- Tags: Educational, Lua, Unity
+- Design:
+  - Wrote every level around a Greek myth: each part opens with a tale, then challenges the player to make it happen in code
+  - Built the concept around the CS student I was helping: she loved Greek mythology, so every level retells a myth, to keep her motivated to finish
+- Programming:
+  - Embedded a Lua interpreter in Unity, so players' code compiles and runs inside the game
+  - Checks each solution against the expected output, with custom hint messages or the compiler's own errors
+
+### Animal Defense
+
+Educational tower defense game about the food chain
+
+- Page: https://pedroloures.com/projects/animal-defense/
+- Role: Lead Programmer · Game Designer · Level Designer
+- Engine / tools: Unity
+- Platform: PC (800×600)
+- Tags: Tower defense, Educational
+- Design:
+  - Teaches the food chain through combat rules: each level of the chain is strong against the one it feeds on
+  - Humans hit everyone, and decomposers boost the gold earned from anything that dies in their area
+- Programming:
+  - Waypoint movement system, a concept I still use today
+- Leadership:
+  - Lead programmer, game designer and level designer on a project planned and built in under 6 months
+
+### Fiat Personalização
+
+Touchscreen app to design custom vehicle stickers and preview them in 3D
+
+- Page: https://pedroloures.com/projects/appfiat-personaliza/
+- Role: Developer (intern)
+- Engine / tools: Unity
+- Platform: Touchscreen PC, promotional event
+- For: Fiat · D2R Studios
+- Tags: Kiosk app, Client: Fiat
+- Design:
+  - Guided kiosk flow for event visitors: enter your details, pick a car and a premade or custom design, then place the sticker on the car
+- Programming:
+  - Got stickers projecting onto the 3D car body within a 10-day pitch deadline by finding and adapting a plugin-based decal approach
+
+### Custom Defense (2020)
+
+Tower customization for a tower defense game · two-week course project
+
+- Page: https://pedroloures.com/projects/customdef/
+- For: Centennial College course project
+- Tags: Tower defense, 2020
+- Design:
+  - Took the brief (a character customization system) and twisted it into customizing towers for a tower defense game
+
+### Procedural Dungeon Generator
+
+Personal research into 3D maze and dungeon generation (shelved)
+
+- Page: https://pedroloures.com/projects/proceduraldung/
+- Tags: Procedural generation, R&D
+- Programming:
+  - 3D dungeon generation with overlap checks between rooms and support for special rooms
+
+### Chaveirinho (2014)
+
+A tiny virtual pet made as a gift · my first mobile game (2014)
+
+- Page: https://pedroloures.com/projects/chaveirinho/
+- Engine / tools: Unity (pre-Canvas)
+- Platform: Android
+- Team size: 2
+- Tags: Mobile, Virtual pet, 2014
+- Design:
+  - A pocket virtual pet with personality: she loves chocolate milk, but only one brand, and gets mad if fed the other
+- Programming:
+  - Touch input and a petting gesture written before Unity had its Canvas UI system
+
+### Digital Wonderland
+
+Story-driven 3D adventure · my first 3D game
+
+- Page: https://pedroloures.com/projects/digitalwonder/
+- Tags: 3D adventure, Story
+- Design:
+  - Wrote the world and story: students trapped in a virus-infected digital world, guided by a two-faced royal companion
+
+### Recifuturo
+
+Educational puzzle adventure in Game Maker · my first game
+
+- Page: https://pedroloures.com/projects/recifuturo/
+- Role: Game Design · Level Design · Programming · Sound Effects
+- Engine / tools: Game Maker
+- Tags: Puzzle adventure, Game Maker
+- Design:
+  - Educational puzzle adventure: I did the game design, level design, programming and sound effects
+- Programming:
+  - Inventory stored in a single untyped matrix, and every button built through inheritance
+

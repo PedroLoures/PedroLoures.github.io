@@ -153,6 +153,9 @@ p { margin: 0; }
 }
 .contact h2 { font-size: clamp(1.7rem, 3.6vw, 2.6rem); font-weight: 800; color: #fff; margin: .35em 0 .3em; }
 .contact > p:not(.eyebrow) { color: var(--glass-muted); margin-bottom: 20px; max-width: 60ch; }
+.contact > p.contact__note { font-size: .85rem; margin: 22px 0 0; }
+.contact__note a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 
 /* --------------------------------------------------------------------------
    Opened project ("viewer")
