@@ -2,6 +2,8 @@
 
 > Pedro Loures, game designer and Unity developer since 2012: haptic VR at UT Austin, serious games for Fiat and Vale, tools still in production, and an SBGames-awarded capstone game.
 
+Full name: Pedro Henrique Zarranz Loures (goes by Pedro Loures).
+
 This is a plain-text summary of pedroloures.com for recruiters, hiring tools and AI assistants. Every project below has its own page with videos, images, code and a postmortem.
 
 - Website: https://pedroloures.com
@@ -10,6 +12,7 @@ This is a plain-text summary of pedroloures.com for recruiters, hiring tools and
 - GitHub: https://github.com/PedroLoures
 - Portfolio PDF (game design): https://pedroloures.com/attachments/pedro-loures-game-design.pdf
 - Portfolio PDF (programming): https://pedroloures.com/attachments/pedro-loures-programming.pdf
+- Full name: Pedro Henrique Zarranz Loures
 - Location: Toronto, Ontario, Canada
 - Open to: Game design, Unity and XR roles, and collaborations
 
@@ -22,13 +25,13 @@ This is a plain-text summary of pedroloures.com for recruiters, hiring tools and
 ## Key facts
 
 - Based in Toronto, Canada. Unity developer since 2012; most of his projects were made in Brazil, where he studied at PUC, before Centennial College in Toronto.
-- Unity lead and project engineer (D2R Studios, volunteer) on Anchored Memories, a five-act haptic VR story about climate migration showcased at UT Austin's Texas Immersive Institute in July 2026: engineered the project's foundation and the base code for VR interactions and audio, set up the five acts the team built on, and took on planning and onboarding for a mostly student team.
+- Unity lead and project engineer (independent partner, volunteer) on Anchored Memories, a five-act haptic VR story about climate migration showcased at UT Austin's Texas Immersive Institute in July 2026: engineered the project's foundation and the base code for VR interactions and audio, set up the five acts the team built on, and was part of the planning team and onboarded students on an interdisciplinary team.
 - SBGames 2013: his capstone game Loneliness took 3rd place in the Popular Vote and won Best Short Paper in the Art & Design track; it was later featured in a PlayTV / Indiana Produções documentary on the history of video games in Brazil.
 - When he programs, he works hands-on across Unity, not only code: level setup, plugin integration and the rest of the editor work.
 - Shipped commercial client work at D2R Studios for Fiat (dev lead on a dealership Quality Manager training sim with 76 real-world scenarios at launch, and a 3D sticker-design kiosk) and for Vale (a three-screen presentation system first built in 2012 and still in use).
 - Built a Blender facial-expression add-on at D2R Studios in 2019 for the studio's animator, who still uses it.
 - Sole programmer on VR Carnival: four seated VR minigames built in under a month.
-- Led a team of newer developers (Coma game jam) and moved a project from Unreal to Unity to hit a showcase deadline (Anchored Memories).
+- Led a team of newer developers (Coma game jam) and moved a project from Unreal to Unity to build on his strongest engine (Anchored Memories).
 
 ## Skills
 
@@ -43,16 +46,17 @@ Listed from most to least relevant. "Design" and "Programming" list what Pedro d
 Five-act haptic VR story on climate migration · Unity lead and project engineer · UT Austin, 2026
 
 - Page: https://pedroloures.com/projects/anchored-memories/
-- Role: Unity Lead · Project Engineer (D2R Studios, volunteer)
+- Role: Unity Lead · Project Engineer (independent partner, volunteer)
 - Engine / tools: Unity
 - Platform: VR + bHaptics TactSuit X40
-- Team size: 12+ (TXI, D2R Studios, UT Austin advisors)
+- Team size: 12+ (TXI, D2R Studios, independent partners, UT Austin advisors)
 - For: Texas Immersive Institute, UT Austin
 - Tags: Haptic VR, Unity, 2026
 - Design:
-  - Designed how the five acts are built: each is a moment in a girl's life with her dad and their Texas home, with weather that mirrors hurricane categories 1 to 5 as the sea rises over the years
+  - Part of the design team on the technical side: chose the tech and approach for bringing Erin Reilly's script and concept to VR
+  - Turned the five acts into a technical structure, with weather that mirrors hurricane categories 1 to 5 as the sea rises over the years
   - Researched how to mimic each storm level, then gave every act inspector controls for the sea and other elements, so the team could shape the weather without code
-  - Set the project up so students with no game-development experience could step in and fill in the blanks
+  - Set the project up so students new to game development could step in and contribute quickly
 - Programming:
   - Engineered the project's foundation: the barebones architecture plus the base code for VR interactions and audio that the team built on
   - Set up the structure of all five acts as separate spaces, each with its own environment prepared for the ocean changes, ready for the team's level design
@@ -60,9 +64,9 @@ Five-act haptic VR story on climate migration · Unity lead and project engineer
   - Shaders (including the sand), rain particle effects with optimization tests, and importing and configuring assets, including the ocean, lent from my own Asset Store library where licenses allowed
   - Helped test the release build on my own VR headset
 - Leadership:
-  - Moved the project from Unreal to Unity when I joined, so a small, part-time team could reach a working build for the July 2026 showcase
+  - Moved the project from Unreal to Unity when I joined, so the team could build on the engine I know best for the July 2026 showcase
   - Main developer on the levels for part of the project, and on call as backup throughout the year
-  - Took on the planning role: kept the GitHub project board in order, helped plan and divide tasks around weekly check-ins, and onboarded the students into the project
+  - Part of the planning team: kept the GitHub project board in order, helped divide tasks around weekly check-ins, and onboarded the students into the project
 - Links:
   - Official project page · Texas Immersive Institute: https://immersive.moody.utexas.edu/projects/anchored-memories
 
