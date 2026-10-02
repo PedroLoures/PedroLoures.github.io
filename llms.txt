@@ -26,7 +26,7 @@ This is a plain-text summary of pedroloures.com for recruiters, hiring tools and
 ## Key facts
 
 - Lives in Toronto, Canada, where he moved from Brazil after 2019. Unity developer since 2012; most of his earlier projects were made in Brazil, where he studied at PUC, and later work includes Centennial College in Toronto and UT Austin's Texas Immersive Institute.
-- Unity lead and project engineer (independent partner, volunteer) on Anchored Memories, a five-act haptic VR story about climate migration showcased at UT Austin's Texas Immersive Institute in July 2026: engineered the project's foundation and the base code for VR interactions and audio, set up the five acts the team built on, was part of the planning team, and onboarded students onto the interdisciplinary team.
+- Unity lead and project engineer (independent partner, volunteer) on Anchored Memories, a five-act haptic VR story about climate migration from UT Austin's Texas Immersive Institute, shown at SIGGRAPH 2026: engineered the project's foundation, including a node-based story graph that let students sequence story beats and VR interactions without code, and the base code for VR interactions and audio, set up the five acts the team built on, was part of the planning team, and onboarded students onto the interdisciplinary team.
 - SBGames 2013: his capstone game Loneliness took 3rd place in the Popular Vote and won Best Short Paper in the Art & Design track; it was later featured in a PlayTV / Indiana Produções documentary on the history of video games in Brazil.
 - When he programs, he works hands-on across Unity, not only code: level setup, plugin integration and the rest of the editor work.
 - Shipped commercial client work at D2R Studios for Fiat (dev lead on a dealership Quality Manager training sim with 76 real-world scenarios at launch, and a 3D sticker-design kiosk) and for Vale (a three-screen presentation system first built in 2012 and still in use).
@@ -52,13 +52,14 @@ Five-act haptic VR story on climate migration · Unity lead and project engineer
 - Platform: VR + bHaptics TactSuit X40
 - Team size: 12+ (TXI, D2R Studios, independent partners, UT Austin advisors)
 - For: Texas Immersive Institute, UT Austin
-- Tags: Haptic VR, Unity, 2026
+- Tags: Haptic VR, Unity, SIGGRAPH 2026
 - Design:
   - Part of the design team on the technical side: chose the tech and approach for bringing Erin Reilly's script and concept to VR
   - Turned the five acts into a technical structure, with weather that mirrors hurricane categories 1 to 5 as the sea rises over the years
   - Researched how to mimic each storm level, then gave every act Inspector controls for the sea and other elements, so the team could shape the weather without code
   - Set the project up so students new to game development could step in and contribute quickly
 - Programming:
+  - Built a node-based story graph on Unity's graph tooling, back when it wasn't yet built into the editor, so students could sequence story beats and VR interactions, with cues and timed hints, without writing code
   - Engineered the project's foundation: the barebones architecture plus the base code for VR interactions and audio that the team built on
   - Set up the structure of all five acts as separate spaces, each with its own environment prepared for the ocean changes, ready for the team's level design
   - Helped plug the haptics designer's bHaptics SDK work into the Unity project
