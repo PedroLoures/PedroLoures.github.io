@@ -21,7 +21,17 @@
         { name: 'Neon Jungle',   ramp: ['#0a1f1c', '#0e4d45', '#21a179', '#9be564', '#e8fcc2'] },
         { name: 'Dusk Plum',     ramp: ['#1a1423', '#372549', '#774c60', '#b75d69', '#eacdc2'] },
         { name: 'Slate',         ramp: ['#101418', '#26313b', '#3e5c76', '#748cab', '#f0ebd8'] },
-        { name: 'Amber',         ramp: ['#1f1300', '#5c3a00', '#c47a00', '#f2a541', '#fff1c1'] }
+        { name: 'Amber',         ramp: ['#1f1300', '#5c3a00', '#c47a00', '#f2a541', '#fff1c1'] },
+        // Bolder primaries and secondaries: yellow, red, green, blue, orange.
+        { name: 'Lemon Drop',    ramp: ['#1c1a0b', '#4a4210', '#c9a400', '#f2d33c', '#fff3a8'] },
+        { name: 'Crimson',       ramp: ['#1a0b0d', '#4d1219', '#c8202f', '#ef5b4c', '#ffd2b8'] },
+        { name: 'Cherry Pop',    ramp: ['#200a14', '#5c0f2a', '#e0254f', '#ff7a59', '#ffe0a3'] },
+        { name: 'Emerald',       ramp: ['#071a10', '#0f4a2a', '#1fa84f', '#5ad674', '#e4ffb8'] },
+        { name: 'Lime Grove',    ramp: ['#111a07', '#2e4a0e', '#6fb21c', '#b7e04a', '#f6ffd1'] },
+        { name: 'Cobalt',        ramp: ['#08122b', '#123a8a', '#2a6bf0', '#58a6ff', '#ffd166'] },
+        { name: 'Sky Blue',      ramp: ['#0a1a2e', '#11457a', '#1f8fe0', '#7cc7ff', '#fff0b3'] },
+        { name: 'Tangerine',     ramp: ['#1f0e05', '#5a2508', '#e8650f', '#ff9f43', '#ffe3b0'] },
+        { name: 'Arcade Primaries', ramp: ['#101633', '#1d3fa3', '#e2343f', '#f7b32b', '#fff3c4'] }
     ];
 
     function rgb(hex) {
