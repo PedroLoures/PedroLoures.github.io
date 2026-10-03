@@ -32,6 +32,8 @@
         // centre. Cells are the pieces (glow, ripples, the window that opens, breaking
         // loose); the triangles are facets that catch the light.
         var cells = [];
+        var HALF_W = Math.sqrt(3) / 2;     // half a cell's width, in radii
+        function hash(a, b) { var h = Math.sin(a * 127.1 + b * 311.7) * 43758.5453; return h - Math.floor(h); }
         var HEX = [0, 1, 2, 3, 4, 5].map(function (k) { var a = Math.PI / 180 * (60 * k - 30); return [Math.cos(a), Math.sin(a)]; });
         var ramp = toRgb((window.PORTFOLIO_THEME || {}).ramp || ['#0b2b33', '#0f5f63', '#0f8f7e', '#7fd6c6', '#f2b880']);
         var fromRamp = null, rampT0 = 0;
@@ -78,8 +80,7 @@
                         facets.push(Math.cos(Math.PI / 180 * (60 * k) - LIGHT) * 0.07 + (rnd() - 0.5) * 0.03);
                     }
                     cells.push({
-                        x: cx, y: cy, facets: facets,
-                        drop: rnd(), spin: (rnd() - 0.5) * 1.1,             // how this cell breaks loose
+                        x: cx, y: cy, row: row, facets: facets,
                         noise: (rnd() - 0.5) * 0.06
                     });
                 }
@@ -160,14 +161,21 @@
                 // loose, the closer to the opening the more, and tumble outward. This is worked
                 // out from the cell's resting place, so the cursor's parallax never flips a cell
                 // between broken and whole; cells nearest the opening shrink away smoothly.
-                var k = 1, awayX = 0, awayY = 0, size = 1;
+                var k = 1, awayX = 0, awayY = 0, size = 1, fade = 1, spin = 0;
                 if (win) {
                     var ex = (cell.x - win.x) / win.rx, ey = (cell.y + scrollY0 - win.y) / win.ry;
                     var ed = Math.sqrt(ex * ex + ey * ey);
                     if (ed < 1.4) {
                         k = Math.max(0, (ed - 1) / 0.4);
-                        size = Math.min(1, Math.max(0, (k - cell.drop * 0.7) / 0.18));
-                        if (size <= 0) { continue; }                  // this cell has fallen out
+                        // Mirrored left/right: a cell and its mirror twin across the opening share
+                        // when they fall and turn the opposite way, so both sides break alike.
+                        var col = Math.round(Math.abs(cell.x - win.x) / (HALF_W * R));
+                        var drop = hash(col, cell.row), side = cell.x < win.x ? -1 : 1;
+                        spin = (hash(cell.row, col + 7) - 0.5) * 1.1 * side;
+                        var f = Math.min(1, Math.max(0, (k - drop * 0.7) / 0.18));
+                        if (f <= 0) { continue; }                     // this cell has fallen out
+                        size = 0.7 + 0.3 * f;                         // no tiny specks: cells fade out instead
+                        fade = f;
                         v += 0.1 * (1 - k);
                         awayX = ex / ed; awayY = ey / ed;
                     }
@@ -175,7 +183,7 @@
                 var loose = 1 - k;
                 var contrast = 1 + glow * 1.6;          // facets catch more light near the cursor
                 if (loose > 0) {                        // drawn last, on top of the hive
-                    looseCells.push({ cell: cell, v: v, contrast: contrast, loose: loose, size: size,
+                    looseCells.push({ cell: cell, v: v, contrast: contrast, loose: loose, size: size, fade: fade, spin: spin,
                         x: cx + awayX * loose * R * 0.5, y: cy + awayY * loose * R * 0.5 });
                     continue;
                 }
@@ -197,15 +205,16 @@
                 var lc = looseCells[l], rr = R * lc.size * (1 - 0.2 * lc.loose);
                 ctx.save();
                 ctx.translate(lc.x, lc.y);
-                ctx.rotate(lc.cell.spin * lc.loose);
-                drawCell(lc.cell, 0, 0, rr, lc.v, lc.contrast, lc.cell.spin * lc.loose * 0.2, t);
+                ctx.rotate(lc.spin * lc.loose);
+                ctx.globalAlpha = lc.fade;
+                drawCell(lc.cell, 0, 0, rr, lc.v, lc.contrast, lc.spin * lc.loose * 0.2, t);
                 ctx.beginPath();
                 for (var m = 0; m < 6; m++) {
                     if (m) { ctx.lineTo(HEX[m][0] * rr, HEX[m][1] * rr); } else { ctx.moveTo(HEX[m][0] * rr, HEX[m][1] * rr); }
                 }
                 ctx.closePath();
                 ctx.strokeStyle = glint;
-                ctx.globalAlpha = 0.3 + 0.5 * lc.loose;
+                ctx.globalAlpha = (0.3 + 0.5 * lc.loose) * lc.fade;
                 ctx.lineWidth = 1.5;
                 ctx.stroke();
                 ctx.restore();
