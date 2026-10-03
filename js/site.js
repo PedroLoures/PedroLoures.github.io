@@ -46,6 +46,8 @@
         // Full frame rate only while something is happening (mouse moving, an effect, a
         // window opening); the slow idle drift runs at 30 fps to save battery.
         var IDLE_GAP = 1000 / 30, ACTIVE_GAP = FINE_POINTER ? 0 : 1000 / 30;
+        var IS_FIREFOX = /firefox/i.test(navigator.userAgent);
+        var colorCache = null, colorCacheRamp = null;   // palette colours precomputed as strings
 
         function toRgb(list) {
             return list.map(function (h) {
@@ -54,7 +56,8 @@
         }
 
         function build() {
-            dpr = Math.min(window.devicePixelRatio || 1, 2);
+            // Flat polygons look sharp at 1.5x; Firefox paints canvas paths more slowly, so it gets 1x.
+            dpr = Math.min(window.devicePixelRatio || 1, IS_FIREFOX ? 1 : 1.5);
             W = window.innerWidth;
             H = window.innerHeight;
             canvas.width = Math.round(W * dpr);
@@ -87,6 +90,14 @@
 
         function rampColor(v, t) {
             v = Math.max(0, Math.min(0.9999, v));
+            if (!fromRamp) {                // steady state: 512 precomputed shades
+                if (colorCacheRamp !== ramp) {
+                    colorCache = [];
+                    colorCacheRamp = ramp;
+                    for (var q = 0; q < 512; q++) { fromRampless(q / 512); }
+                }
+                return colorCache[(v * 512) | 0];
+            }
             var n = ramp.length - 1, i = Math.floor(v * n), f = v * n - i;
             var a = ramp[i], b = ramp[i + 1];
             var out = [a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f, a[2] + (b[2] - a[2]) * f];
@@ -97,6 +108,10 @@
                 out = [old[0] + (out[0] - old[0]) * k, old[1] + (out[1] - old[1]) * k, old[2] + (out[2] - old[2]) * k];
             }
             return 'rgb(' + (out[0] | 0) + ',' + (out[1] | 0) + ',' + (out[2] | 0) + ')';
+        }
+        function fromRampless(v) {
+            var n = ramp.length - 1, i = Math.floor(v * n), f = v * n - i, a = ramp[i], b = ramp[i + 1];
+            colorCache.push('rgb(' + ((a[0] + (b[0] - a[0]) * f) | 0) + ',' + ((a[1] + (b[1] - a[1]) * f) | 0) + ',' + ((a[2] + (b[2] - a[2]) * f) | 0) + ')');
         }
 
         function draw(t) {
@@ -116,6 +131,7 @@
             var outline = 'rgba(' + (edge[0] * 0.55 | 0) + ',' + (edge[1] * 0.55 | 0) + ',' + (edge[2] * 0.55 | 0) + ',0.55)';
             var lit = ramp[ramp.length - 1];
             var glint = 'rgb(' + lit[0] + ',' + lit[1] + ',' + lit[2] + ')';
+            var walls = new Path2D(), looseCells = [];
 
             for (var c = 0; c < cells.length; c++) {
                 var cell = cells[c];
@@ -157,41 +173,61 @@
                     }
                 }
                 var loose = 1 - k;
-                var rr = R * size * (1 - 0.2 * loose);
-                ctx.save();
-                ctx.translate(cx + awayX * loose * R * 0.5, cy + awayY * loose * R * 0.5);
-                if (loose > 0) { ctx.rotate(cell.spin * loose); }
-
                 var contrast = 1 + glow * 1.6;          // facets catch more light near the cursor
-                var tilt = cell.spin * loose * 0.2;     // a loose cell turns its face to the light
-                for (var i = 0; i < 6; i++) {
-                    var A = HEX[i], B = HEX[(i + 1) % 6];
-                    ctx.fillStyle = rampColor(v + cell.facets[i] * contrast + tilt, t);
-                    ctx.beginPath();
-                    ctx.moveTo(0, 0);
-                    ctx.lineTo(A[0] * rr, A[1] * rr);
-                    ctx.lineTo(B[0] * rr, B[1] * rr);
-                    ctx.closePath();
-                    ctx.fill();
-                    ctx.strokeStyle = ctx.fillStyle; ctx.lineWidth = 1; ctx.stroke();
+                if (loose > 0) {                        // drawn last, on top of the hive
+                    looseCells.push({ cell: cell, v: v, contrast: contrast, loose: loose, size: size,
+                        x: cx + awayX * loose * R * 0.5, y: cy + awayY * loose * R * 0.5 });
+                    continue;
                 }
-
-                // Cell walls; a loose cell's rim catches the light like a glass edge.
-                ctx.beginPath();
+                // The base hexagon fill hides hairline seams between facets (no per-facet stroke).
+                drawCell(cell, cx, cy, R * size, v, contrast, 0, t);
+                // Cell walls are collected into one path and stroked once.
                 for (var j = 0; j < 6; j++) {
-                    if (j) { ctx.lineTo(HEX[j][0] * rr, HEX[j][1] * rr); } else { ctx.moveTo(HEX[j][0] * rr, HEX[j][1] * rr); }
+                    var wx = cx + HEX[j][0] * R, wy = cy + HEX[j][1] * R;
+                    if (j) { walls.lineTo(wx, wy); } else { walls.moveTo(wx, wy); }
+                }
+                walls.closePath();
+            }
+            ctx.strokeStyle = outline;
+            ctx.lineWidth = 1.5;
+            ctx.stroke(walls);
+
+            // Loose cells turn as they drift away; their rim catches the light like a glass edge.
+            for (var l = 0; l < looseCells.length; l++) {
+                var lc = looseCells[l], rr = R * lc.size * (1 - 0.2 * lc.loose);
+                ctx.save();
+                ctx.translate(lc.x, lc.y);
+                ctx.rotate(lc.cell.spin * lc.loose);
+                drawCell(lc.cell, 0, 0, rr, lc.v, lc.contrast, lc.cell.spin * lc.loose * 0.2, t);
+                ctx.beginPath();
+                for (var m = 0; m < 6; m++) {
+                    if (m) { ctx.lineTo(HEX[m][0] * rr, HEX[m][1] * rr); } else { ctx.moveTo(HEX[m][0] * rr, HEX[m][1] * rr); }
                 }
                 ctx.closePath();
-                if (loose > 0) {
-                    ctx.strokeStyle = glint;
-                    ctx.globalAlpha = 0.3 + 0.5 * loose;
-                    ctx.lineWidth = 1.5;
-                } else {
-                    ctx.strokeStyle = outline;
-                    ctx.lineWidth = 2;
-                }
+                ctx.strokeStyle = glint;
+                ctx.globalAlpha = 0.3 + 0.5 * lc.loose;
+                ctx.lineWidth = 1.5;
                 ctx.stroke();
                 ctx.restore();
+            }
+        }
+
+        // One hexagon: a base fill, then its six shaded facets. tilt shifts the shading of a loose cell.
+        function drawCell(cell, x, y, rr, v, contrast, tilt, t) {
+            ctx.fillStyle = rampColor(v + tilt, t);
+            ctx.beginPath();
+            for (var j = 0; j < 6; j++) {
+                if (j) { ctx.lineTo(x + HEX[j][0] * rr, y + HEX[j][1] * rr); } else { ctx.moveTo(x + HEX[j][0] * rr, y + HEX[j][1] * rr); }
+            }
+            ctx.fill();
+            for (var i = 0; i < 6; i++) {
+                var A = HEX[i], B = HEX[(i + 1) % 6];
+                ctx.fillStyle = rampColor(v + cell.facets[i] * contrast + tilt, t);
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+                ctx.lineTo(x + A[0] * rr, y + A[1] * rr);
+                ctx.lineTo(x + B[0] * rr, y + B[1] * rr);
+                ctx.fill();
             }
         }
 

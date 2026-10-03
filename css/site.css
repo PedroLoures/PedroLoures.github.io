@@ -305,3 +305,10 @@ p { margin: 0; }
     *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
     .pcard:hover { transform: none; }
 }
+
+/* Firefox re-blurs the animated background behind every frosted bar on each frame,
+   which is what made it feel slow there. The bars are 92% opaque, so the blur adds
+   almost nothing visually; Firefox skips it. */
+@supports (-moz-appearance: none) {
+    .topbar, .viewer__nav { -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
