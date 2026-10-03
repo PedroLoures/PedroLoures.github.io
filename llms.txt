@@ -1,8 +1,8 @@
-# Pedro Loures: Game Designer and Unity Developer
+# Pedro H. Z. Loures: Game Designer and Unity Developer
 
-> Pedro Loures, game designer and Unity developer since 2012: haptic VR at UT Austin, serious games for Fiat and Vale, tools still in production and an award-winning SBGames capstone game.
+> Pedro H. Z. Loures, game designer and Unity developer since 2012: haptic VR at UT Austin, serious games for Fiat and Vale, tools still in production and an award-winning SBGames capstone game.
 
-Full name: Pedro Henrique Zarranz Loures (goes by Pedro Loures). Last updated: October 3, 2026.
+Full name: Pedro Henrique Zarranz Loures. Signs as Pedro H. Z. Loures and goes by Pedro Loures; not to be confused with other people named Pedro Loures. Last updated: October 3, 2026.
 
 This is a plain-text summary of pedroloures.com for recruiters, hiring tools and AI assistants. Every project below has its own page with more detail, such as videos, images, code or a postmortem.
 

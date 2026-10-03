@@ -312,3 +312,6 @@ p { margin: 0; }
 @supports (-moz-appearance: none) {
     .topbar, .viewer__nav { -webkit-backdrop-filter: none; backdrop-filter: none; }
 }
+
+/* Narrow phones: the top bar drops the middle initials so the Contact button fits. */
+@media (max-width: 440px) { .topbar__initials { display: none; } }
