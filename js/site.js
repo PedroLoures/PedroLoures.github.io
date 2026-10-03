@@ -7,7 +7,8 @@
       breaks open around it and a panel rises with the write-up; closing shrinks
       it back into the card; ←/→ (or swipe) switch projects in place. Each
       project also has its own page (/projects/<slug>/) for sharing and search.
-   3. Small things: gallery lightbox, copy-email, palette dice, toasts.
+   3. Small things: gallery lightbox (←/→ and swipe between images), copy-email,
+      palette dice, toasts.
    Respects prefers-reduced-motion everywhere.
    ========================================================================== */
 (function () {
@@ -723,28 +724,45 @@
         });
     });
 
-    // Gallery images open full-size; Esc, a click or the ✕ closes and focus goes back.
+    // Gallery images open full-size. ←/→, the arrow buttons or a swipe move through the
+    // project's images; Esc, a click on the backdrop or the ✕ closes and focus goes back.
     var lightbox = $('#lightbox');
     if (lightbox) {
-        var lbImg = $('img', lightbox), lbClose = $('.lightbox__close', lightbox), lbOpener = null;
+        var lbImg = $('img', lightbox), lbClose = $('.lightbox__close', lightbox), lbCount = $('[data-lb-count]', lightbox);
+        var lbOpener = null, lbSet = [], lbIndex = 0;
+        var showLb = function (i, dir) {
+            lbIndex = (i + lbSet.length) % lbSet.length;
+            var img = lbSet[lbIndex];
+            lbImg.src = img.currentSrc || img.src;
+            lbImg.alt = img.alt || '';
+            lbCount.textContent = (lbIndex + 1) + ' / ' + lbSet.length;
+            if (!REDUCED && lbImg.animate) {
+                lbImg.animate(dir
+                    ? [{ opacity: 0, transform: 'translateX(' + (dir * 40) + 'px)' }, { opacity: 1, transform: 'none' }]
+                    : [{ opacity: 0, transform: 'scale(.96)' }, { opacity: 1, transform: 'none' }],
+                    { duration: 220, easing: 'cubic-bezier(.2,.8,.2,1)' });
+            }
+        };
+        var stepLb = function (dir) { if (lbSet.length > 1) { showLb(lbIndex + dir, dir); } };
         var closeLb = function () {
             if (lightbox.hidden) { return; }
             lightbox.hidden = true;
             lbImg.removeAttribute('src');
-            if (lbOpener && lbOpener.focus) { lbOpener.focus({ preventScroll: true }); }
+            var back = lbSet[lbIndex] || lbOpener;
+            if (back && back.focus) { back.focus({ preventScroll: true }); }
         };
         document.addEventListener('click', function (e) {
             var img = e.target.closest && e.target.closest('.gallery img');
             if (!img) { return; }
             e.preventDefault();
             lbOpener = img;
-            lbImg.src = img.currentSrc || img.src;
-            lbImg.alt = img.alt || '';
+            // All gallery images of the same project write-up, in page order.
+            var scope = img.closest('.proj__body, .viewer__content, main') || document;
+            lbSet = $$('.gallery img', scope);
+            lightbox.classList.toggle('is-single', lbSet.length < 2);
             lightbox.hidden = false;
+            showLb(Math.max(0, lbSet.indexOf(img)), 0);
             lbClose.focus({ preventScroll: true });
-            if (!REDUCED && lbImg.animate) {
-                lbImg.animate([{ opacity: 0, transform: 'scale(.96)' }, { opacity: 1, transform: 'none' }], { duration: 220, easing: 'cubic-bezier(.2,.8,.2,1)' });
-            }
         });
         document.addEventListener('keydown', function (e) {
             if ((e.key === 'Enter' || e.key === ' ') && e.target.matches && e.target.matches('.gallery img')) {
@@ -752,11 +770,29 @@
                 e.target.click();
             }
         });
-        lightbox.addEventListener('click', closeLb);
+        $('[data-lb-prev]', lightbox).addEventListener('click', function (e) { e.stopPropagation(); stepLb(-1); });
+        $('[data-lb-next]', lightbox).addEventListener('click', function (e) { e.stopPropagation(); stepLb(1); });
+        lightbox.addEventListener('click', function (e) { if (!e.target.closest('.lightbox__nav')) { closeLb(); } });
         document.addEventListener('keydown', function (e) {
             if (lightbox.hidden) { return; }
-            if (e.key === 'Escape') { closeLb(); }
-            else if (e.key === 'Tab') { e.preventDefault(); lbClose.focus(); }   // keep focus in the viewer
+            if (e.key === 'Escape') { e.preventDefault(); closeLb(); }
+            else if (e.key === 'ArrowRight') { e.preventDefault(); stepLb(1); }
+            else if (e.key === 'ArrowLeft') { e.preventDefault(); stepLb(-1); }
+            else if (e.key === 'Tab') {             // keep focus inside the viewer
+                e.preventDefault();
+                var stops = $$('button', lightbox).filter(function (b) { return b.offsetParent !== null; });
+                var at = stops.indexOf(document.activeElement);
+                stops[(at + (e.shiftKey ? -1 : 1) + stops.length) % stops.length].focus();
+            }
+        });
+        // Swipe left/right on phones.
+        var lbX = null, lbY = null;
+        lightbox.addEventListener('touchstart', function (e) { lbX = e.touches[0].clientX; lbY = e.touches[0].clientY; }, { passive: true });
+        lightbox.addEventListener('touchend', function (e) {
+            if (lbX === null) { return; }
+            var dx = e.changedTouches[0].clientX - lbX, dy = e.changedTouches[0].clientY - lbY;
+            lbX = null;
+            if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) { e.preventDefault(); stepLb(dx < 0 ? 1 : -1); }
         });
     }
 
