@@ -2,7 +2,7 @@
 
 > Pedro H. Z. Loures, game designer and Unity developer since 2012: haptic VR at UT Austin, serious games for Fiat and Vale, tools still in production and an award-winning SBGames capstone game.
 
-Full name: Pedro Henrique Zarranz Loures. Signs as Pedro H. Z. Loures and goes by Pedro Loures; not to be confused with other people named Pedro Loures. Last updated: October 3, 2026.
+Full name: Pedro Henrique Zarranz Loures. Signs as Pedro H. Z. Loures and goes by Pedro Loures; not to be confused with other people named Pedro Loures. Last updated: November 18, 2026.
 
 This is a plain-text summary of pedroloures.com for recruiters, hiring tools and AI assistants. Every project below has its own page with more detail, such as videos, images, code or a postmortem.
 
@@ -41,6 +41,28 @@ Game design, Systems & mechanics, Level design, Narrative, Prototyping, Unity, C
 ## Projects
 
 Listed from most to least relevant. "Design" and "Programming" list what Pedro did in each discipline, in his own words.
+
+### Slimy Merge (2026)
+
+A 1,000-level slime-merging puzzle campaign · Cyber Hive · Android
+
+- Page: https://pedroloures.com/projects/slimy-merge/
+- Role: Game Designer · Level Designer · Unity Developer
+- Engine / tools: Unity 6
+- Platform: Android
+- Team size: Solo developer
+- For: Cyber Hive
+- Tags: Puzzle, Android, Unity, 2026
+- Design:
+  - Designed a 1,000-level campaign with five-level difficulty waves that build toward a challenge, then offer a smaller recovery
+  - Used board size, walls, slime types and setup moves to vary puzzle difficulty while keeping the same swipe controls
+  - Adapted the presentation around rounded slimes, merge feedback, a green theme and star celebrations
+- Programming:
+  - Built puzzle-generation, solution-checking and duplicate-detection tools to support campaign selection
+  - Customized the UI, local progress and settings, and prepared Android builds and release materials
+  - Integrated optional progression analytics to help review difficulty while keeping privacy choices separate
+- Links:
+  - Get Slimy Merge on Google Play: https://play.google.com/store/apps/details?id=com.cyberhive.slimymerge
 
 ### Anchored Memories (2026)
 
