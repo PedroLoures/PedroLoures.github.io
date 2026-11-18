@@ -136,6 +136,11 @@ p { margin: 0; }
     .pcard:hover .pcard__thumb { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 86%); }
     .pcard:hover .pcard__thumb img { transform: scale(1.04); }
 }
+/* Keep the full Slimy Merge artwork visible on its project card. */
+.pcard[data-slug="slimy-merge"] .pcard__thumb,
+.pcard[data-slug="slimy-merge"]:hover .pcard__thumb { background: #113824; clip-path: none; }
+.pcard[data-slug="slimy-merge"] .pcard__thumb img { object-fit: contain; }
+.pcard[data-slug="slimy-merge"]:hover .pcard__thumb img { transform: none; }
 .pcard:focus-visible { outline-offset: 4px; }
 .pcard.is-source { visibility: hidden; }
 
