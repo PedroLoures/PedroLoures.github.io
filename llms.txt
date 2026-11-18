@@ -334,3 +334,48 @@ Educational puzzle adventure in Game Maker · my first game
 - Programming:
   - Inventory stored in a single untyped matrix, and every button built through inheritance
 
+### Dino Runner (2026)
+
+Choose your gates, grow a dinosaur herd and buy time against the meteor.
+
+- Page: https://pedroloures.com/projects/dino-runner/
+- Role: Game developer
+- Engine / tools: Unity
+- Platform: Android
+- Team size: Solo developer
+- For: Cyber Hive
+- Tags: Runner, Android, Unity, 2026
+- Links:
+  - Get Dino Runner on Google Play: https://play.google.com/store/apps/details?id=com.cyberhive.dinorunner
+  - Explore on Cyber Hive: https://cyberhive.games/games/dino-runner.html
+
+### Letterweave (2026)
+
+Connect letters, uncover extra words and explore 300 puzzles in 17 languages.
+
+- Page: https://pedroloures.com/projects/letterweave/
+- Role: Game developer
+- Engine / tools: Unity
+- Platform: Android
+- Team size: Solo developer
+- For: Cyber Hive
+- Tags: Word puzzle, Android, Unity, 2026
+- Links:
+  - Get Letterweave on Google Play: https://play.google.com/store/apps/details?id=com.cyberhive.letterweave
+  - Explore on Cyber Hive: https://cyberhive.games/games/letterweave.html
+
+### Save The Boto (2026)
+
+Swim with Bobo, dodge river debris and collect pearls to restore his home.
+
+- Page: https://pedroloures.com/projects/save-the-boto/
+- Role: Game developer
+- Engine / tools: Unity
+- Platform: Android
+- Team size: Solo developer
+- For: Cyber Hive
+- Tags: Arcade, Android, Unity, 2026
+- Links:
+  - Get Save The Boto on Google Play: https://play.google.com/store/apps/details?id=com.cyberhive.savetheboto
+  - Explore on Cyber Hive: https://cyberhive.games/games/save-the-boto.html
+
