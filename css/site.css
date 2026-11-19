@@ -341,3 +341,8 @@ p { margin: 0; }
 .pcard[data-slug="tracing-in-english"] .pcard__thumb, .pcard[data-slug="tracing-in-english"]:hover .pcard__thumb {background:#fffaf2;clip-path:none}
 .pcard[data-slug="tracing-in-english"] .pcard__thumb img {object-fit:contain}
 .pcard[data-slug="tracing-in-english"]:hover .pcard__thumb img {transform:none}
+
+/* Keep the current game feature artwork fully visible. */
+.pcard[data-slug="slimy-merge"] .pcard__thumb, .pcard[data-slug="slimy-merge"]:hover .pcard__thumb,.pcard[data-slug="letterweave"] .pcard__thumb, .pcard[data-slug="letterweave"]:hover .pcard__thumb,.pcard[data-slug="dino-runner"] .pcard__thumb, .pcard[data-slug="dino-runner"]:hover .pcard__thumb,.pcard[data-slug="save-the-boto"] .pcard__thumb, .pcard[data-slug="save-the-boto"]:hover .pcard__thumb{background:#17291b;clip-path:none}
+.pcard[data-slug="slimy-merge"] .pcard__thumb img,.pcard[data-slug="letterweave"] .pcard__thumb img,.pcard[data-slug="dino-runner"] .pcard__thumb img,.pcard[data-slug="save-the-boto"] .pcard__thumb img{object-fit:contain}
+.pcard[data-slug="slimy-merge"]:hover .pcard__thumb img,.pcard[data-slug="letterweave"]:hover .pcard__thumb img,.pcard[data-slug="dino-runner"]:hover .pcard__thumb img,.pcard[data-slug="save-the-boto"]:hover .pcard__thumb img{transform:none}
