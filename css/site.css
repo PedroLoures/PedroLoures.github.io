@@ -336,3 +336,8 @@ p { margin: 0; }
 .pcard[data-slug="dino-runner"] .pcard__thumb, .pcard[data-slug="dino-runner"]:hover .pcard__thumb {background:#493823;clip-path:none}
 .pcard[data-slug="dino-runner"] .pcard__thumb img {object-fit:contain}
 .pcard[data-slug="dino-runner"]:hover .pcard__thumb img {transform:none}
+
+/* Show the complete Tracing In English feature graphic. */
+.pcard[data-slug="tracing-in-english"] .pcard__thumb, .pcard[data-slug="tracing-in-english"]:hover .pcard__thumb {background:#fffaf2;clip-path:none}
+.pcard[data-slug="tracing-in-english"] .pcard__thumb img {object-fit:contain}
+.pcard[data-slug="tracing-in-english"]:hover .pcard__thumb img {transform:none}

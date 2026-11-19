@@ -42,6 +42,21 @@ Game design, Systems & mechanics, Level design, Narrative, Prototyping, Unity, C
 
 Listed from most to least relevant. "Design" and "Programming" list what Pedro did in each discipline, in his own words.
 
+### Tracing In English (2026)
+
+A colorful tracing game for practicing English letters, numbers and words.
+
+- Page: https://pedroloures.com/projects/tracing-in-english/
+- Role: Game developer
+- Engine / tools: Unity
+- Platform: Android
+- Team size: Solo developer
+- For: Cyber Hive
+- Tags: Educational, Android, Unity, 2026
+- Links:
+  - Get Tracing In English on Google Play: https://play.google.com/store/apps/details?id=com.cyberhive.tracingenglish
+  - Explore on Cyber Hive: https://cyberhive.games/games/tracing-in-english.html
+
 ### Slimy Merge (2026)
 
 A 1,000-level slime-merging puzzle campaign · Cyber Hive · Android
