@@ -331,3 +331,8 @@ p { margin: 0; }
 /* Keep the studio link accessible without crowding narrow phones. */
 .topbar__studio .icon { flex: none; }
 @media (max-width: 440px) { .topbar__links { gap: 8px; } .topbar__links a[aria-label="GitHub"] { display: none; } }
+
+/* The portrait gameplay image remains fully visible on the Dino Runner card. */
+.pcard[data-slug="dino-runner"] .pcard__thumb, .pcard[data-slug="dino-runner"]:hover .pcard__thumb {background:#493823;clip-path:none}
+.pcard[data-slug="dino-runner"] .pcard__thumb img {object-fit:contain}
+.pcard[data-slug="dino-runner"]:hover .pcard__thumb img {transform:none}
