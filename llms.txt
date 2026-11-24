@@ -2,7 +2,7 @@
 
 > Pedro H. Z. Loures, game designer and Unity developer since 2012: haptic VR at UT Austin, serious games for Fiat and Vale, tools still in production and an award-winning SBGames capstone game.
 
-Full name: Pedro Henrique Zarranz Loures. Signs as Pedro H. Z. Loures and goes by Pedro Loures; not to be confused with other people named Pedro Loures. Last updated: November 20, 2026.
+Full name: Pedro Henrique Zarranz Loures. Signs as Pedro H. Z. Loures and goes by Pedro Loures; not to be confused with other people named Pedro Loures. Last updated: November 24, 2026.
 
 This is a plain-text summary of pedroloures.com for recruiters, hiring tools and AI assistants. Every project below has its own page with more detail, such as videos, images, code or a postmortem.
 
@@ -42,20 +42,20 @@ Game design, Systems & mechanics, Level design, Narrative, Prototyping, Unity, C
 
 Listed from most to least relevant. "Design" and "Programming" list what Pedro did in each discipline, in his own words.
 
-### Tracing In English (2026)
+### Bastionfall: Tower Defense (2026)
 
-A colorful tracing game for practicing English letters, numbers and words.
+Defend 100 fantasy towns across ten regions.
 
-- Page: https://pedroloures.com/projects/tracing-in-english/
+- Page: https://pedroloures.com/projects/bastionfall/
 - Role: Game developer
 - Engine / tools: Unity
 - Platform: Android
 - Team size: Solo developer
 - For: Cyber Hive
-- Tags: Educational, Android, Unity, 2026
+- Tags: Strategy, Android, Unity, 2026
 - Links:
-  - Get Tracing In English on Google Play: https://play.google.com/store/apps/details?id=com.cyberhive.tracingenglish
-  - Explore on Cyber Hive: https://cyberhive.games/games/tracing-in-english.html
+  - Get Bastionfall: Tower Defense on Google Play: https://play.google.com/store/apps/details?id=com.cyberhive.bastionfall
+  - Explore on Cyber Hive: https://cyberhive.games/games/bastionfall.html
 
 ### Slimy Merge (2026)
 
